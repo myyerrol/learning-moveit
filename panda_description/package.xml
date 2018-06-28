@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>panda_description</name>
+  <version>0.0.1</version>
+  <description>The panda_description package provides a complete 3D model of the panda arm for simulation and visualization.</description>
+
+  <maintainer email="myyerrol@126.com">myyerrol</maintainer>
+
+  <license>BSD</license>
+
+  <author email="myyerrol@126.com">myyerrol</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>urdf</build_depend>
+  <build_depend>xacro</build_depend>
+
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+</package>
