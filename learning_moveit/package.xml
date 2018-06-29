@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>learning_moveit</name>
   <version>0.0.1</version>
   <description>The learning_moveit metapackage contains some packages for motion planning.</description>
@@ -12,6 +12,9 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <run_depend>panda_moveit_config</run_depend>
+  <exec_depend>moveit_tutorials</exec_depend>
+  <exec_depend>panda_description</exec_depend>
+  <exec_depend>panda_moveit_config</exec_depend>
+  <exec_depend>panda_moveit_motion_planning</exec_depend>
 
 </package>

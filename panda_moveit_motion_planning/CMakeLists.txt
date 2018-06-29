@@ -61,7 +61,6 @@ include_directories(
 )
 
 include_directories(
-  include/panda_moveit_motion_planning/
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -70,7 +69,6 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(
   ${PROJECT_NAME}
-  include/panda_moveit_motion_planning/panda_moveit_motion_planning.h
   src/panda_moveit_motion_planning.cpp
 )
 
