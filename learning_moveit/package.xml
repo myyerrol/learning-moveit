@@ -17,4 +17,7 @@
   <exec_depend>panda_moveit_config</exec_depend>
   <exec_depend>panda_moveit_motion_planning</exec_depend>
 
+  <export>
+    <metapackage/>
+  </export>
 </package>

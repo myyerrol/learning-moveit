@@ -29,5 +29,4 @@
   <exec_depend>interactive_markers</exec_depend>
   <exec_depend>moveit_visual_tools</exec_depend>
   <exec_depend>joy</exec_depend>
-
 </package>
