@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>panda_gazebo</name>
+  <version>0.0.1</version>
+  <description>The panda_gazebo package can launch panda_arm_hand in gazebo simulator.</description>
+
+  <maintainer email="myyerrol@126.com">myyerrol</maintainer>
+
+  <license>BSD</license>
+  
+  <author email="myyerrol@126.com">myyerrol</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>gazebo_ros</build_depend>
+
+  <exec_depend>gazebo_ros</exec_depend>
+</package>
