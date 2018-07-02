@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <transmission name="joint1_simp_trans">
     <type>transmission_interface/SimpleTransmission</type>
