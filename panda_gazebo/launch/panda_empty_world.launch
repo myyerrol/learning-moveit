@@ -15,7 +15,7 @@
     <arg name="headless" value="$(arg headless)" />
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find panda_description)/urdf/panda_arm_hand.urdf.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find panda_description)/urdf/panda_arm_hand.xacro'" />
 
   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -x 0 -y 0 -z 0 -model panda -param robot_description" respawn="false" output="screen" />
 
