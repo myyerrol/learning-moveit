@@ -2,75 +2,63 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 <!-- <xacro:property name="M_PI" value="3.1415926535897931" /> -->
 
-<gazebo reference="panda_link0">
-  <material>Gazebo/Black</material>
-</gazebo>
-
-<gazebo reference="panda_link1">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link2">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link3">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link4">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link5">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link6">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link7">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_link8">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_hand">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Orange</material>
-</gazebo>
-
-<gazebo reference="panda_leftfinger">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Red</material>
-</gazebo>
-
-<gazebo reference="panda_rightfinger">
-  <mu1>0.2</mu1>
-  <mu2>0.2</mu2>
-  <material>Gazebo/Red</material>
-</gazebo>
+<!--   <gazebo reference="panda_link0">
+  </gazebo> -->
+  
+  <gazebo reference="panda_link1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link2">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link3">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link4">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link5">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link6">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link7">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_link8">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_hand">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_leftfinger">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+  
+  <gazebo reference="panda_rightfinger">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
 
 <!--   <gazebo reference="base_link">
     <kp>10000.0</kp>
