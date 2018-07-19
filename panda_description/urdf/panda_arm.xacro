@@ -22,9 +22,9 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0.05" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
       </inertial>
     </link>
 
@@ -40,9 +40,9 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0.0125" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
       </inertial>
     </link>
 
@@ -67,9 +67,9 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
       </inertial>
     </link>
 
@@ -93,11 +93,11 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link3.stl" />
         </geometry>
       </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+<!--       <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
-      </inertial>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial> -->
     </link>
 
     <joint name="${arm_id}_joint3" type="revolute">
@@ -120,11 +120,11 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link4.stl" />
         </geometry>
       </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+<!--       <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
-      </inertial>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial> -->
     </link>
 
     <joint name="${arm_id}_joint4" type="revolute">
@@ -147,11 +147,11 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link5.stl" />
         </geometry>
       </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+<!--       <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
-      </inertial>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial> -->
     </link>
 
     <joint name="${arm_id}_joint5" type="revolute">
@@ -174,11 +174,11 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link6.stl" />
         </geometry>
       </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+<!--       <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
-      </inertial>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial> -->
     </link>
 
     <joint name="${arm_id}_joint6" type="revolute">
@@ -201,11 +201,11 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link7.stl" />
         </geometry>
       </collision>
-      <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
+<!--       <inertial>
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <mass value="1" />
-        <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
-      </inertial>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+      </inertial> -->
     </link>
 
     <joint name="${arm_id}_joint7" type="revolute">
