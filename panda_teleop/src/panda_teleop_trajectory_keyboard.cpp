@@ -36,7 +36,7 @@ ArmTeleopTrajectoryKeyboard::ArmTeleopTrajectoryKeyboard()
 
     ros::NodeHandle n_private("~");
     n_private.param("arm_pose_step", arm_pos_step_, 0.0174);
-    n_private.param("gripper_pos_step", gripper_pos_step_, 0.1);
+    n_private.param("gripper_pos_step", gripper_pos_step_, 0.01);
 
     gripper_pos_pub_ = panda_nh_.advertise<std_msgs::Float64>(
         "hand_controller/gripper_action/command", 1000);
@@ -117,41 +117,64 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
         switch(keyboard_cmd) {
             case KEYCODE_Q: {
                 arm_position[arm_index_["panda_joint1"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint1"]] >= 2.90) {
+                    arm_position[arm_index_["panda_joint1"]] = 2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_W: {
                 arm_position[arm_index_["panda_joint2"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint2"]] >= 1.76) {
+                    arm_position[arm_index_["panda_joint2"]] = 1.76;
+                }
                 flag = true;
-                break;                
+                break;
             }
             case KEYCODE_E: {
                 arm_position[arm_index_["panda_joint3"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint3"]] >= 2.90) {
+                    arm_position[arm_index_["panda_joint3"]] = 2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_A: {
                 arm_position[arm_index_["panda_joint4"]] += arm_pos_step_;
-                flag = true;
+                if (arm_position[arm_index_["panda_joint4"]] >= 0.0) {
+                    arm_position[arm_index_["panda_joint4"]] = 0.0;
+                }
                 break;
             }
             case KEYCODE_S: {
                 arm_position[arm_index_["panda_joint5"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint5"]] >= 2.90) {
+                    arm_position[arm_index_["panda_joint5"]] = 2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_D: {
                 arm_position[arm_index_["panda_joint6"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint6"]] >= 3.75) {
+                    arm_position[arm_index_["panda_joint6"]] = 3.75;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_Z: {
                 arm_position[arm_index_["panda_joint7"]] += arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint7"]] >= 2.90) {
+                    arm_position[arm_index_["panda_joint7"]] = 2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_X: {
                 gripper_position += gripper_pos_step_;
+                if (gripper_position >= 0.04) {
+                    gripper_position = 0.04;
+                }
                 gripper_pos_.data = gripper_position;
                 gripper_pos_pub_.publish(gripper_pos_);
                 flag = true;
@@ -159,41 +182,63 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
             }
             case KEYCODE_Q_CAP: {
                 arm_position[arm_index_["panda_joint1"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint1"]] <= -2.90) {
+                    arm_position[arm_index_["panda_joint1"]] = -2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_W_CAP: {
                 arm_position[arm_index_["panda_joint2"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint2"]] <= -1.76) {
+                    arm_position[arm_index_["panda_joint2"]] = -1.76;
+                }
                 flag = true;
-                break;                
+                break;
             }
             case KEYCODE_E_CAP: {
                 arm_position[arm_index_["panda_joint3"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint3"]] <= -2.90) {
+                    arm_position[arm_index_["panda_joint3"]] = -2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_A_CAP: {
                 arm_position[arm_index_["panda_joint4"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint4"]] <= -3.07) {
+                    arm_position[arm_index_["panda_joint4"]] = -3.07;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_S_CAP: {
                 arm_position[arm_index_["panda_joint5"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint5"]] <= -2.90) {
+                    arm_position[arm_index_["panda_joint5"]] = -2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_D_CAP: {
                 arm_position[arm_index_["panda_joint6"]] -= arm_pos_step_;
-                flag = true;
+                if (arm_position[arm_index_["panda_joint6"]] <= 0.0) {
+                    arm_position[arm_index_["panda_joint6"]] = 0.0;
+                }
                 break;
             }
             case KEYCODE_Z_CAP: {
                 arm_position[arm_index_["panda_joint7"]] -= arm_pos_step_;
+                if (arm_position[arm_index_["panda_joint7"]] <= -2.90) {
+                    arm_position[arm_index_["panda_joint7"]] = -2.90;
+                }
                 flag = true;
                 break;
             }
             case KEYCODE_X_CAP: {
                 gripper_position -= gripper_pos_step_;
+                if (gripper_position <= 0.0)
+                    gripper_position = 0.0;
                 gripper_pos_.data = gripper_position;
                 gripper_pos_pub_.publish(gripper_pos_);
                 flag = true;
@@ -209,8 +254,7 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
         arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint2"]] =
             arm_position[arm_index_["panda_joint2"]];
         arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint3"]] = arm_position[arm_index_["panda_joint3"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint4"]] =
-            arm_position[arm_index_["panda_joint4"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint4"]] = arm_position[arm_index_["panda_joint4"]];
         arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint5"]] =
             arm_position[arm_index_["panda_joint5"]];
         arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint6"]] = arm_position[arm_index_["panda_joint6"]];
