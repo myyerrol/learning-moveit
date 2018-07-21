@@ -5,7 +5,6 @@
 
   <node name="joint_trajectory_controller_spawner" pkg="controller_manager" type="spawner"
         respawn="false" output="screen" ns="/"
-        args="panda_arm_controller" 
-             "hand_controller" />
+        args="panda_arm_controller" />
 
 </launch>
