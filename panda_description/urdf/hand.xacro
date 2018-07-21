@@ -21,11 +21,14 @@
           <mesh filename="package://panda_description/meshes/collision/hand.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.25" rpy="0 0 0" />
-        <mass value="0.5" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="-2.7600000000e-06 -6.1551000000e-04 2.3929520000e-02"
+                rpy="0 0 0" />
+        <mass value="2.36" />
+        <inertia ixx="8.0087281861e-03"  ixy="-1.3983247099e-06"
+                 ixz="3.1668653650e-07"  iyy="1.6099853693e-03"
+                 iyz="-1.4527159720e-04" izz="7.2469819837e-03" />
+      </inertial>
     </link>
 
     <link name="${ns}_leftfinger">
@@ -39,11 +42,14 @@
           <mesh filename="package://panda_description/meshes/collision/finger.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.25" rpy="0 0 0" />
-        <mass value="0.25" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="-2.4250000000e-05 1.1958490000e-02 2.3781550000e-02"
+                rpy="0 0 0" />
+        <mass value="0.73" />
+        <inertia ixx="1.9009821976e-04" ixy="-1.2251156196e-07"
+                 ixz="2.1231749953e-07" iyy="1.8154811386e-04"
+                 iyz="2.2800975511e-05" izz="5.5792802358e-05" />
+      </inertial>
     </link>
 
     <link name="${ns}_rightfinger">
@@ -59,11 +65,14 @@
           <mesh filename="package://panda_description/meshes/collision/finger.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.25" rpy="0 0 0" />
-        <mass value="0.25" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="-2.4250000000e-05 1.1958490000e-02 2.3781550000e-02"
+                rpy="0 0 0" />
+        <mass value="0.73" />
+        <inertia ixx="1.9009821976e-04" ixy="-1.2251156196e-07"
+                 ixz="2.1231749953e-07" iyy="1.8154811386e-04"
+                 iyz="2.2800975511e-05" izz="5.5792802358e-05" />
+      </inertial>
     </link>
 
     <joint name="${ns}_finger_joint1" type="prismatic">

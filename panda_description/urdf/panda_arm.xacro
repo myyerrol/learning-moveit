@@ -22,9 +22,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 0.05" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        <origin xyz="-2.9189750000e-02 -8.7947000000e-04 5.6603190000e-02"
+                rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia ixx="3.0208907507e-03"  ixy="-1.9469434530e-05"
+                 ixz="-4.5987519329e-04" iyy="3.9017274973e-03"
+                 iyz="-4.1208729424e-07" izz="4.0286070431e-03" />
       </inertial>
     </link>
 
@@ -40,9 +43,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 0 -0.08" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
+        <origin xyz="1.1400000000e-05 -3.1265540000e-02 -6.9373290000e-02"
+                rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia ixx="5.9226730485e-03" ixy="1.4245315766e-07"
+                 ixz="3.8568507530e-07" iyy="5.1298138460e-03"
+                 iyz="1.1560796647e-03" izz="2.3931512155e-03" />
       </inertial>
     </link>
 
@@ -67,11 +73,12 @@
         </geometry>
       </collision>
       <inertial>
-        <origin xyz="0 -0.05 0" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="-1" ixy="0" ixz="0" 
-                 iyy="-1" iyz="0"
-                 izz="-1" />
+        <origin xyz="-1.3180000000e-05 -7.0321540000e-02 3.1178270000e-02"
+                rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia ixx="5.9962199438e-03"  ixy="-6.7615014029e-07"
+                 ixz="-2.3493516929e-07" iyy="2.3948403893e-03"
+                 iyz="-1.1636087632e-03" izz="5.2033249732e-03" />
       </inertial>
     </link>
 
@@ -95,11 +102,14 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link3.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="4.4348280000e-02 2.4928320000e-02 -3.8130030000e-02"
+                rpy="0 0 0" />
+        <mass value="0.78" />
+        <inertia ixx="2.4814391703e-03"  ixy="-4.8315843437e-04"
+                 ixz="-8.2557114619e-04" iyy="2.9935310139e-03"
+                 iyz="-4.4604815446e-04" izz="2.5083810118e-03" />
+      </inertial>
     </link>
 
     <joint name="${arm_id}_joint3" type="revolute">
@@ -122,11 +132,14 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link4.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="-3.8550270000e-02 3.9525550000e-02 2.4716210000e-02"
+                rpy="0 0 0" />
+        <mass value="0.79" />
+        <inertia ixx="2.5698770428e-03"  ixy="8.5226293644e-04"
+                 ixz="-4.8914733021e-04" iyy="2.5435632961e-03"
+                 iyz="4.6078342421e-04"  izz="3.0898802746e-03" />
+      </inertial>
     </link>
 
     <joint name="${arm_id}_joint4" type="revolute">
@@ -149,11 +162,14 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link5.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="-6.3700000000e-05 3.8412360000e-02 -1.0997013000e-01"
+                rpy="0 0 0" />
+        <mass value="1.14" />
+        <inertia ixx="9.9489526162e-03"  ixy="-3.0923971423e-06"
+                 ixz="-1.3276013105e-05" iyy="9.0449844181e-03"
+                 iyz="-1.9558597152e-03" izz="2.5774715454e-03" />
+      </inertial>
     </link>
 
     <joint name="${arm_id}_joint5" type="revolute">
@@ -176,11 +192,14 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link6.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="5.1002280000e-02 6.9326700000e-03 6.1689700000e-03"
+                rpy="0 0 0" />
+        <mass value="0.48" />
+        <inertia ixx="7.7550750204e-04" ixy="-5.4535229445e-05"
+                 ixz="9.8447394353e-05" iyy="1.1843242027e-03"
+                 iyz="9.7507874688e-06" izz="1.4430443083e-03" />
+      </inertial>
     </link>
 
     <joint name="${arm_id}_joint6" type="revolute">
@@ -203,11 +222,14 @@
           <mesh filename="package://${description_pkg}/meshes/collision/link7.stl" />
         </geometry>
       </collision>
-<!--       <inertial>
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
-        <mass value="1" />
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1" />
-      </inertial> -->
+      <inertial>
+        <origin xyz="1.0361390000e-02 1.0359650000e-02 7.9107730000e-02"
+                rpy="0 0 0" />
+        <mass value="1.49" />
+        <inertia ixx="1.4440550235e-03"  ixy="-4.4171751527e-04"
+                 ixz="-4.8331020139e-05" iyy="1.4430197316e-03"
+                 iyz="-4.8495088634e-05" izz="2.2729277029e-03" />
+      </inertial>
     </link>
 
     <joint name="${arm_id}_joint7" type="revolute">
