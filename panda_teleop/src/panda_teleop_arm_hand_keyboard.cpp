@@ -45,15 +45,15 @@ TeleopArmHandKeyboard::TeleopArmHandKeyboard()
         "panda_arm_controller/follow_joint_trajectory", true);
 
     hand_command_client_ = boost::make_shared<HandCommandClient>(
-        "hand_controller/hand_cmd", true);
+        "hand_controller/gripper_cmd", true);
 
     while (!arm_trajectory_client_->waitForServer(ros::Duration(5))) {
         ROS_INFO_STREAM("Waiting for the joint_trajectory_action server...");
     }
 
-    while (!hand_command_client_->waitForServer(ros::Duration(5))) {
-        ROS_INFO_STREAM("Waiting for the grippper_command_action server...");
-    }
+    // while (!hand_command_client_->waitForServer(ros::Duration(5))) {
+    //     ROS_INFO_STREAM("Waiting for the grippper_command_action server...");
+    // }
 }
 
 TeleopArmHandKeyboard::~TeleopArmHandKeyboard()

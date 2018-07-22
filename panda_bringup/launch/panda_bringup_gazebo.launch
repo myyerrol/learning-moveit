@@ -1,5 +1,8 @@
 <launch>
 
+  <!-- Load gazebo ros control configurations -->
+<!--   <rosparam file="$(find panda_gazebo_controller_config)/config/panda_gazebo_ros_control.yaml" command="load" /> -->
+
   <!-- Launch gazebo -->
   <include file="$(find panda_gazebo)/launch/panda_gazebo_empty_world.launch" />
 

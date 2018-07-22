@@ -1,0 +1,23 @@
+<launch>
+
+  <!-- Launch gazebo -->
+  <include file="$(find panda_gazebo)/launch/panda_gazebo_empty_world.launch" />
+
+  <!-- Load  panda joint state launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_state.launch" />
+
+  <!-- Load panda joint trajectory launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_trajectory.launch" />
+
+  <!-- Load panda gripper action launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_gripper_action.launch" />
+
+  <!-- Load moveit launch file -->
+  <include file="$(find panda_moveit_config)/launch/move_group.launch" />
+
+  <!-- Run RViz -->
+  <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find panda_bringup)/rviz/panda_bringup_gazebo_and_moveit.rviz" output="screen">
+    <rosparam command="load" file="$(find panda_moveit_config)/config/kinematics.yaml" />
+  </node>
+
+</launch>

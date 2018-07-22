@@ -1,3 +1,4 @@
 hand_controller:
   type: position_controllers/GripperActionController
+  parallel: true
   joint: panda_finger_joint1

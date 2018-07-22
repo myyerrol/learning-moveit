@@ -1,62 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  
-  <gazebo reference="panda_link1">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link2">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link3">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link4">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link5">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link6">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link7">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_link8">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_hand">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_leftfinger">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-  
-  <gazebo reference="panda_rightfinger">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+
+<xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <gazebo reference="panda_link0">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
   </gazebo>
 
-<!--   <gazebo reference="panda_hand">
+  <gazebo reference="panda_link1">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link2">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link3">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link4">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link5">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link6">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link7">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_link8">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_hand">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_leftfinger">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_rightfinger">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+  </gazebo>
+
+  <gazebo reference="panda_hand">
     <sensor type="depth" name="kinect">
       <update_rate>20</update_rate>
       <camera>
@@ -95,6 +126,6 @@
         <hackBaseline>0</hackBaseline>
       </plugin>
     </sensor>
-  </gazebo> -->
+  </gazebo>
 
 </robot>

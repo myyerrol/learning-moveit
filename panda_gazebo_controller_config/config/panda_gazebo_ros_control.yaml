@@ -1,0 +1,51 @@
+gazebo_ros_control:
+  pid_gains:
+    panda_joint1:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint2:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint3:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint4:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint5:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint6:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
+    panda_joint7:
+      p: 1000.0
+      i: 0.0
+      d: 0.1
+      i_clamp: 0.0
+      antiwindup: false
+      publish_state: true
