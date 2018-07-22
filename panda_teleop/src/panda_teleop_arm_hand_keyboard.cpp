@@ -1,10 +1,10 @@
-#include <panda_teleop/panda_teleop_trajectory_keyboard.h>
+#include <panda_teleop/panda_teleop_arm_hand_keyboard.h>
 
 int            g_kfd = 0;
 struct termios g_cooked;
 struct termios g_raw;
 
-ArmTeleopTrajectoryKeyboard::ArmTeleopTrajectoryKeyboard()
+TeleopArmHandKeyboard::TeleopArmHandKeyboard()
 {
     arm_name_.push_back("panda_joint1");
     arm_name_.push_back("panda_joint2");
@@ -34,38 +34,38 @@ ArmTeleopTrajectoryKeyboard::ArmTeleopTrajectoryKeyboard()
         arm_goal_.trajectory.points[0].accelerations[i] = 0.0;
     }
 
-    gripper_goal_.command.position   = 0.0;
-    gripper_goal_.command.max_effort = 0.0;
+    hand_goal_.command.position   = 0.0;
+    hand_goal_.command.max_effort = 0.0;
 
     ros::NodeHandle n_private("~");
-    n_private.param("arm_pose_step", arm_pos_step_, 0.0174);
-    n_private.param("gripper_pos_step", gripper_pos_step_, 0.001);
+    n_private.param("arm_pos_step", arm_pos_step_, 0.0174);
+    n_private.param("hand_pos_step", hand_pos_step_, 0.001);
 
-    trajectory_client_ =  boost::make_shared<TrajectoryClient>(
+    arm_trajectory_client_ =  boost::make_shared<ArmTrajectoryClient>(
         "panda_arm_controller/follow_joint_trajectory", true);
 
-    gripper_cmd_client_ = boost::make_shared<GripperCmdClient>(
-        "hand_controller/gripper_cmd", true);
+    hand_command_client_ = boost::make_shared<HandCommandClient>(
+        "hand_controller/hand_cmd", true);
 
-    while (!trajectory_client_->waitForServer(ros::Duration(5))) {
+    while (!arm_trajectory_client_->waitForServer(ros::Duration(5))) {
         ROS_INFO_STREAM("Waiting for the joint_trajectory_action server...");
     }
 
-    while (!gripper_cmd_client_->waitForServer(ros::Duration(5))) {
+    while (!hand_command_client_->waitForServer(ros::Duration(5))) {
         ROS_INFO_STREAM("Waiting for the grippper_command_action server...");
     }
 }
 
-ArmTeleopTrajectoryKeyboard::~ArmTeleopTrajectoryKeyboard()
+TeleopArmHandKeyboard::~TeleopArmHandKeyboard()
 {
     panda_nh_.shutdown();
 }
 
-void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
+void TeleopArmHandKeyboard::spinTeleopArmHand()
 {
     char   keyboard_cmd;
     double arm_position[6];
-    double gripper_position = 0;
+    double hand_position = 0;
     bool   flag = false;
 
     memset(arm_position, 0, sizeof(arm_position));
@@ -88,13 +88,13 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
     puts("-----------------------------------------");
     puts("Q:Joint1-UP  W:Joint2-UP  E:Joint3-UP    ");
     puts("A:Joint4-UP  S:Joint5-UP  D:Joint6-UP    ");
-    puts("Z:Joint7-UP  X:Gripper Open              ");
+    puts("Z:Joint7-UP  X:Hand-Open                 ");
     puts("-----------------------------------------");
     puts("Shift+Q:Joint1-DOWN  Shift+W:Joint2-DOWN ");
     puts("Shift+E:Joint3-DOWN  Shift+A:Joint4-DOWN ");
     puts("Shift+S:Joint5-DOWN  Shift+D:Joint6-DOWN ");
     puts("Shift+Z:Joint7-DOWN                      ");
-    puts("Shift+X:Gripper Close"                    );
+    puts("Shift+X:Hand-Close"                       );
     puts("-----------------------------------------");
     puts("PRESS CTRL-C TO QUIT                     ");
 
@@ -179,12 +179,12 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
                 break;
             }
             case KEYCODE_X: {
-                gripper_position += gripper_pos_step_;
-                if (gripper_position >= 0.04) {
-                    gripper_position = 0.04;
+                hand_position += hand_pos_step_;
+                if (hand_position >= 0.04) {
+                    hand_position = 0.04;
                 }
-                gripper_goal_.command.position = gripper_position;
-                gripper_cmd_client_->sendGoal(gripper_goal_);
+                hand_goal_.command.position = hand_position;
+                hand_command_client_->sendGoal(hand_goal_);
                 flag = true;
                 break;
             }
@@ -244,11 +244,11 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
                 break;
             }
             case KEYCODE_X_CAP: {
-                gripper_position -= gripper_pos_step_;
-                if (gripper_position <= 0.0)
-                    gripper_position = 0.0;
-                gripper_goal_.command.position = gripper_position;
-                gripper_cmd_client_->sendGoal(gripper_goal_);
+                hand_position -= hand_pos_step_;
+                if (hand_position <= 0.0)
+                    hand_position = 0.0;
+                hand_goal_.command.position = hand_position;
+                hand_command_client_->sendGoal(hand_goal_);
                 flag = true;
                 break;
             }
@@ -270,20 +270,20 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
 
         arm_goal_.trajectory.points[0].time_from_start = ros::Duration(5);
         arm_goal_.goal_time_tolerance = ros::Duration(0);
-        trajectory_client_->sendGoal(arm_goal_);
+        arm_trajectory_client_->sendGoal(arm_goal_);
     }
 }
 
 int main(int argc, char **argv)
 {
-    ros::init(argc,argv,"panda_teleop_trajectory_keyboard",
+    ros::init(argc,argv,"panda_teleop_arm_hand_keyboard",
         ros::init_options::NoSigintHandler);
 
-    ArmTeleopTrajectoryKeyboard teleop_trajectory_keyboard;
+    TeleopArmHandKeyboard teleop_arm_hand_keyboard;
 
     boost::thread make_thread = boost::thread(boost::bind(
-        &ArmTeleopTrajectoryKeyboard::spinTeleopArm,
-        &teleop_trajectory_keyboard));
+        &TeleopArmHandKeyboard::spinTeleopArmHand,
+        &teleop_arm_hand_keyboard));
 
     ros::spin();
 

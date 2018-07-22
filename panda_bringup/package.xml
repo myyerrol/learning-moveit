@@ -2,7 +2,7 @@
 <package format="2">
   <name>panda_bringup</name>
   <version>0.0.1</version>
-  <description>The panda_bringup package provides roslaunch for starting panda_arm motion planning and simulation test.</description>
+  <description>The panda_bringup package provides roslaunch for starting panda_arm_hand motion planning and simulation test.</description>
 
   <maintainer email="myyerrol@126.com">myyerrol</maintainer>
 

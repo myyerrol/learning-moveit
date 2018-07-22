@@ -17,12 +17,12 @@ include_directories(
 )
 
 add_executable(
-  panda_teleop_trajectory_keyboard
-  include/panda_teleop/panda_teleop_trajectory_keyboard.h
-  src/panda_teleop_trajectory_keyboard.cpp
+  panda_teleop_arm_hand_keyboard
+  include/panda_teleop/panda_teleop_arm_hand_keyboard.h
+  src/panda_teleop_arm_hand_keyboard.cpp
 )
 
 target_link_libraries(
-  panda_teleop_trajectory_keyboard
+  panda_teleop_arm_hand_keyboard
   ${catkin_LIBRARIES}
 )

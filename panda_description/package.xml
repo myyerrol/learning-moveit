@@ -2,7 +2,7 @@
 <package format="2">
   <name>panda_description</name>
   <version>0.0.1</version>
-  <description>The panda_description package provides a complete 3D model of the panda arm for simulation and visualization.</description>
+  <description>The panda_description package provides a complete 3D model of the panda_arm_hand for simulation and visualization.</description>
 
   <maintainer email="myyerrol@126.com">myyerrol</maintainer>
 

@@ -1,5 +1,5 @@
-#ifndef PANDA_TELEOP_TRAJECTORY_KEYBOARD
-#define PANDA_TELEOP_TRAJECTORY_KEYBOARD
+#ifndef PANDA_TELEOP_ARM_HAND_KEYBOARD
+#define PANDA_TELEOP_ARM_HAND_KEYBOARD
 
 #include <ros/ros.h>
 #include <std_msgs/Float64.h>
@@ -34,28 +34,29 @@
 #define KEYCODE_X_CAP 0x58
 #define KEYCODE_Z_CAP 0x5A
 
-typedef actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
-    TrajectoryClient;
+typedef
+actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
+    ArmTrajectoryClient;
 typedef actionlib::SimpleActionClient<control_msgs::GripperCommandAction>
-    GripperCmdClient;
+    HandCommandClient;
 
-class ArmTeleopTrajectoryKeyboard
+class TeleopArmHandKeyboard
 {
 public:
-    ArmTeleopTrajectoryKeyboard();
-    ~ArmTeleopTrajectoryKeyboard();
-    void spinTeleopArm();
-    void stopTeleopArm();
+    TeleopArmHandKeyboard();
+    ~TeleopArmHandKeyboard();
+    void spinTeleopArmHand();
+    void stopTeleopArmHand();
 private:
     ros::NodeHandle                         panda_nh_;
-    std::map<std::string, int>              arm_index_;
-    double                                  arm_pos_step_;
-    std::vector<std::string>                arm_name_;
     control_msgs::FollowJointTrajectoryGoal arm_goal_;
-    double                                  gripper_pos_step_;
-    control_msgs::GripperCommandGoal        gripper_goal_;
-    boost::shared_ptr<TrajectoryClient>     trajectory_client_;
-    boost::shared_ptr<GripperCmdClient>     gripper_cmd_client_;
+    control_msgs::GripperCommandGoal        hand_goal_;
+    double                                  arm_pos_step_;
+    double                                  hand_pos_step_;
+    std::vector<std::string>                arm_name_;
+    std::map<std::string, int>              arm_index_;
+    boost::shared_ptr<ArmTrajectoryClient>  arm_trajectory_client_;
+    boost::shared_ptr<HandCommandClient>    hand_command_client_;
 };
 
-#endif // PANDA_TELEOP_TRAJECTORY_KEYBOARD
+#endif // PANDA_TELEOP_ARM_HAND_KEYBOARD
