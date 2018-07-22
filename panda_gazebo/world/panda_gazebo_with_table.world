@@ -10,7 +10,12 @@
     <include>
       <uri>model://bookshelf</uri>
       <name>bookshelf</name>
-      <pose>0.0 1.0 0 0 0 0</pose>
+      <pose>0 1 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://tube_2_25cm</uri>
+      <name>tube_2_25cm</name>
+      <pose>0 0.8 0.45 0.024 0.016 0</pose>
     </include>
   </world>
 </sdf>
