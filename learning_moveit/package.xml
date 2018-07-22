@@ -12,13 +12,14 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <exec_depend>moveit_tutorials</exec_depend>
+  <exec_depend>panda_bringup</exec_depend>
   <exec_depend>panda_description</exec_depend>
-  <exec_depend>panda_moveit_config</exec_depend>
+  <exec_depend>panda_gazebo</exec_depend>
+  <exec_depend>panda_gazebo_controller_config</exec_depend>
   <exec_depend>panda_moveit_motion_planning</exec_depend>
+  <exec_depend>panda_teleop</exec_depend>
 
   <export>
     <metapackage/>
   </export>
-
 </package>
