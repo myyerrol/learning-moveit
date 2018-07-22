@@ -4,6 +4,7 @@
 #include <ros/ros.h>
 #include <std_msgs/Float64.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
+#include <control_msgs/GripperCommandAction.h>
 #include <actionlib/client/simple_action_client.h>
 #include <termio.h>
 #include <signal.h>
@@ -35,6 +36,8 @@
 
 typedef actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
     TrajectoryClient;
+typedef actionlib::SimpleActionClient<control_msgs::GripperCommandAction>
+    GripperCmdClient;
 
 class ArmTeleopTrajectoryKeyboard
 {
@@ -49,11 +52,10 @@ private:
     double                                  arm_pos_step_;
     std::vector<std::string>                arm_name_;
     control_msgs::FollowJointTrajectoryGoal arm_goal_;
-    ros::Publisher                          gripper_pos_pub_;
     double                                  gripper_pos_step_;
-    std_msgs::Float64                       gripper_pos_;
+    control_msgs::GripperCommandGoal        gripper_goal_;
     boost::shared_ptr<TrajectoryClient>     trajectory_client_;
-    std::string                             teleop_type_;
+    boost::shared_ptr<GripperCmdClient>     gripper_cmd_client_;
 };
 
 #endif // PANDA_TELEOP_TRAJECTORY_KEYBOARD

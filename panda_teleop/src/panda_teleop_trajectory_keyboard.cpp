@@ -34,18 +34,25 @@ ArmTeleopTrajectoryKeyboard::ArmTeleopTrajectoryKeyboard()
         arm_goal_.trajectory.points[0].accelerations[i] = 0.0;
     }
 
+    gripper_goal_.command.position   = 0.0;
+    gripper_goal_.command.max_effort = 0.0;
+
     ros::NodeHandle n_private("~");
     n_private.param("arm_pose_step", arm_pos_step_, 0.0174);
-    n_private.param("gripper_pos_step", gripper_pos_step_, 0.01);
-
-    gripper_pos_pub_ = panda_nh_.advertise<std_msgs::Float64>(
-        "hand_controller/gripper_action/command", 1000);
+    n_private.param("gripper_pos_step", gripper_pos_step_, 0.001);
 
     trajectory_client_ =  boost::make_shared<TrajectoryClient>(
         "panda_arm_controller/follow_joint_trajectory", true);
 
+    gripper_cmd_client_ = boost::make_shared<GripperCmdClient>(
+        "hand_controller/gripper_cmd", true);
+
     while (!trajectory_client_->waitForServer(ros::Duration(5))) {
-        ROS_INFO_STREAM("Waiting for the joint_trajectory_action server");
+        ROS_INFO_STREAM("Waiting for the joint_trajectory_action server...");
+    }
+
+    while (!gripper_cmd_client_->waitForServer(ros::Duration(5))) {
+        ROS_INFO_STREAM("Waiting for the grippper_command_action server...");
     }
 }
 
@@ -60,6 +67,7 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
     double arm_position[6];
     double gripper_position = 0;
     bool   flag = false;
+
     memset(arm_position, 0, sizeof(arm_position));
 
     tcgetattr(g_kfd, &g_cooked);
@@ -175,8 +183,8 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
                 if (gripper_position >= 0.04) {
                     gripper_position = 0.04;
                 }
-                gripper_pos_.data = gripper_position;
-                gripper_pos_pub_.publish(gripper_pos_);
+                gripper_goal_.command.position = gripper_position;
+                gripper_cmd_client_->sendGoal(gripper_goal_);
                 flag = true;
                 break;
             }
@@ -239,8 +247,8 @@ void ArmTeleopTrajectoryKeyboard::spinTeleopArm()
                 gripper_position -= gripper_pos_step_;
                 if (gripper_position <= 0.0)
                     gripper_position = 0.0;
-                gripper_pos_.data = gripper_position;
-                gripper_pos_pub_.publish(gripper_pos_);
+                gripper_goal_.command.position = gripper_position;
+                gripper_cmd_client_->sendGoal(gripper_goal_);
                 flag = true;
                 break;
             }
