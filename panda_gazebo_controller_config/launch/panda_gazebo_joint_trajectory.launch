@@ -1,5 +1,5 @@
 <launch>
-  
+
   <!-- Load joint controller configurations from YAML file to parameter server -->
   <rosparam file="$(find panda_gazebo_controller_config)/config/panda_gazebo_joint_trajectory.yaml" command="load" />
 

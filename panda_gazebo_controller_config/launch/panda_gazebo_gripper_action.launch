@@ -1,0 +1,10 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find panda_gazebo_controller_config)/config/panda_gazebo_gripper_action.yaml" command="load" />
+
+  <node name="gripper_action_controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen" ns="/"
+        args="hand_controller" />
+
+</launch>
