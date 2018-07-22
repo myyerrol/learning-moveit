@@ -1,0 +1,17 @@
+<launch>
+
+  <!-- Launch gazebo -->
+  <include file="$(find panda_gazebo)/launch/panda_empty_world.launch" />
+
+  <!-- Load  panda joint state launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_state.launch" />
+
+  <!-- Load panda joint trajectory launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_trajectory.launch" />
+
+  <!-- Load panda gripper action launch file -->
+  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_gripper_action.launch" />
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find panda_bringup)/rviz/panda_bringup_gazebo.rviz" />
+
+</launch>
