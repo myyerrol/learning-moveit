@@ -37,8 +37,12 @@
 typedef
 actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
     ArmTrajectoryClient;
-typedef actionlib::SimpleActionClient<control_msgs::GripperCommandAction>
-    HandCommandClient;
+// typedef actionlib::SimpleActionClient<control_msgs::GripperCommandAction>
+//     HandCommandClient;
+typedef
+actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
+    HandTrajectoryClient;
+
 
 class TeleopArmHandKeyboard
 {
@@ -50,13 +54,15 @@ public:
 private:
     ros::NodeHandle                         panda_nh_;
     control_msgs::FollowJointTrajectoryGoal arm_goal_;
-    control_msgs::GripperCommandGoal        hand_goal_;
-    double                                  arm_pos_step_;
-    double                                  hand_pos_step_;
+    control_msgs::FollowJointTrajectoryGoal hand_goal_;
+    // control_msgs::GripperCommandGoal        hand_goal_;
+    double                                  arm_position_step_;
+    double                                  hand_position_step_;
     std::vector<std::string>                arm_name_;
     std::map<std::string, int>              arm_index_;
     boost::shared_ptr<ArmTrajectoryClient>  arm_trajectory_client_;
-    boost::shared_ptr<HandCommandClient>    hand_command_client_;
+    boost::shared_ptr<HandTrajectoryClient> hand_trajectory_client_;
+    // boost::shared_ptr<HandCommandClient>    hand_command_client_;
 };
 
 #endif // PANDA_TELEOP_ARM_HAND_KEYBOARD

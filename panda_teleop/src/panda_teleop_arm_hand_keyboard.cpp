@@ -34,20 +34,38 @@ TeleopArmHandKeyboard::TeleopArmHandKeyboard()
         arm_goal_.trajectory.points[0].accelerations[i] = 0.0;
     }
 
-    hand_goal_.command.position   = 0.0;
-    hand_goal_.command.max_effort = 0.0;
+    hand_goal_.trajectory.joint_names.push_back("panda_finger_joint1");
+    hand_goal_.trajectory.joint_names.push_back("panda_finger_joint2");
+
+    hand_goal_.trajectory.points.resize(1);
+    hand_goal_.trajectory.points[0].positions.resize(2);
+    hand_goal_.trajectory.points[0].velocities.resize(2);
+    hand_goal_.trajectory.points[0].accelerations.resize(2);
+
+    for (int i = 0; i < 2; i++) {
+        hand_goal_.trajectory.points[0].positions[i]     = 0.0;
+        hand_goal_.trajectory.points[0].velocities[i]    = 0.0;
+        hand_goal_.trajectory.points[0].accelerations[i] = 0.0;
+    }
+
+    // hand_goal_.command.position   = 0.0;
+    // hand_goal_.command.max_effort = 0.0;
 
     ros::NodeHandle n_private("~");
-    n_private.param("arm_pos_step", arm_pos_step_, 0.0174);
-    n_private.param("hand_pos_step", hand_pos_step_, 0.001);
+    n_private.param("arm_position_step", arm_position_step_, 0.0174);
+    n_private.param("hand_position_step", hand_position_step_, 0.001);
 
     arm_trajectory_client_ =  boost::make_shared<ArmTrajectoryClient>(
         "panda_arm_controller/follow_joint_trajectory", true);
 
-    hand_command_client_ = boost::make_shared<HandCommandClient>(
-        "hand_controller/gripper_cmd", true);
+    hand_trajectory_client_ = boost::make_shared<HandTrajectoryClient>(
+        "hand_controller/follow_joint_trajectory", true);
 
-    while (!arm_trajectory_client_->waitForServer(ros::Duration(5))) {
+    // hand_command_client_ = boost::make_shared<HandCommandClient>(
+    //     "hand_controller/gripper_cmd", true);
+
+    while (!arm_trajectory_client_->waitForServer(ros::Duration(5)) &&
+           !hand_trajectory_client_->waitForServer(ros::Duration(5))) {
         ROS_INFO_STREAM("Waiting for the joint_trajectory_action server...");
     }
 
@@ -124,7 +142,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
 
         switch(keyboard_cmd) {
             case KEYCODE_Q: {
-                arm_position[arm_index_["panda_joint1"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint1"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint1"]] >= 2.90) {
                     arm_position[arm_index_["panda_joint1"]] = 2.90;
                 }
@@ -132,7 +150,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_W: {
-                arm_position[arm_index_["panda_joint2"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint2"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint2"]] >= 1.76) {
                     arm_position[arm_index_["panda_joint2"]] = 1.76;
                 }
@@ -140,7 +158,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_E: {
-                arm_position[arm_index_["panda_joint3"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint3"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint3"]] >= 2.90) {
                     arm_position[arm_index_["panda_joint3"]] = 2.90;
                 }
@@ -148,14 +166,14 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_A: {
-                arm_position[arm_index_["panda_joint4"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint4"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint4"]] >= 0.0) {
                     arm_position[arm_index_["panda_joint4"]] = 0.0;
                 }
                 break;
             }
             case KEYCODE_S: {
-                arm_position[arm_index_["panda_joint5"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint5"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint5"]] >= 2.90) {
                     arm_position[arm_index_["panda_joint5"]] = 2.90;
                 }
@@ -163,7 +181,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_D: {
-                arm_position[arm_index_["panda_joint6"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint6"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint6"]] >= 3.75) {
                     arm_position[arm_index_["panda_joint6"]] = 3.75;
                 }
@@ -171,7 +189,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_Z: {
-                arm_position[arm_index_["panda_joint7"]] += arm_pos_step_;
+                arm_position[arm_index_["panda_joint7"]] += arm_position_step_;
                 if (arm_position[arm_index_["panda_joint7"]] >= 2.90) {
                     arm_position[arm_index_["panda_joint7"]] = 2.90;
                 }
@@ -179,17 +197,23 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_X: {
-                hand_position += hand_pos_step_;
+                hand_position += hand_position_step_;
                 if (hand_position >= 0.04) {
                     hand_position = 0.04;
                 }
-                hand_goal_.command.position = hand_position;
-                hand_command_client_->sendGoal(hand_goal_);
+                hand_goal_.trajectory.points[0].positions[0] = hand_position;
+                hand_goal_.trajectory.points[0].positions[1] = hand_position;
+                hand_goal_.trajectory.points[0].time_from_start =
+                    ros::Duration(5);
+                hand_goal_.goal_time_tolerance = ros::Duration(0);
+                hand_trajectory_client_->sendGoal(hand_goal_);
+                // hand_goal_.command.position = hand_position;
+                // hand_command_client_->sendGoal(hand_goal_);
                 flag = true;
                 break;
             }
             case KEYCODE_Q_CAP: {
-                arm_position[arm_index_["panda_joint1"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint1"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint1"]] <= -2.90) {
                     arm_position[arm_index_["panda_joint1"]] = -2.90;
                 }
@@ -197,7 +221,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_W_CAP: {
-                arm_position[arm_index_["panda_joint2"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint2"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint2"]] <= -1.76) {
                     arm_position[arm_index_["panda_joint2"]] = -1.76;
                 }
@@ -205,7 +229,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_E_CAP: {
-                arm_position[arm_index_["panda_joint3"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint3"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint3"]] <= -2.90) {
                     arm_position[arm_index_["panda_joint3"]] = -2.90;
                 }
@@ -213,7 +237,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_A_CAP: {
-                arm_position[arm_index_["panda_joint4"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint4"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint4"]] <= -3.07) {
                     arm_position[arm_index_["panda_joint4"]] = -3.07;
                 }
@@ -221,7 +245,7 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_S_CAP: {
-                arm_position[arm_index_["panda_joint5"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint5"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint5"]] <= -2.90) {
                     arm_position[arm_index_["panda_joint5"]] = -2.90;
                 }
@@ -229,14 +253,14 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_D_CAP: {
-                arm_position[arm_index_["panda_joint6"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint6"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint6"]] <= 0.0) {
                     arm_position[arm_index_["panda_joint6"]] = 0.0;
                 }
                 break;
             }
             case KEYCODE_Z_CAP: {
-                arm_position[arm_index_["panda_joint7"]] -= arm_pos_step_;
+                arm_position[arm_index_["panda_joint7"]] -= arm_position_step_;
                 if (arm_position[arm_index_["panda_joint7"]] <= -2.90) {
                     arm_position[arm_index_["panda_joint7"]] = -2.90;
                 }
@@ -244,11 +268,18 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_X_CAP: {
-                hand_position -= hand_pos_step_;
-                if (hand_position <= 0.0)
+                hand_position -= hand_position_step_;
+                if (hand_position <= 0.0) {
                     hand_position = 0.0;
-                hand_goal_.command.position = hand_position;
-                hand_command_client_->sendGoal(hand_goal_);
+                }
+                hand_goal_.trajectory.points[0].positions[0] = hand_position;
+                hand_goal_.trajectory.points[0].positions[1] = hand_position;
+                hand_goal_.trajectory.points[0].time_from_start =
+                    ros::Duration(5);
+                hand_goal_.goal_time_tolerance = ros::Duration(0);
+                hand_trajectory_client_->sendGoal(hand_goal_);
+                // hand_goal_.command.position = hand_position;
+                // hand_command_client_->sendGoal(hand_goal_);
                 flag = true;
                 break;
             }
