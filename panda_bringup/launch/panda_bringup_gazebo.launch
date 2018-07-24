@@ -12,9 +12,6 @@
   <!-- Load panda joint trajectory launch file -->
   <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_trajectory.launch" />
 
-  <!-- Load panda gripper action launch file -->
-  <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_gripper_action.launch" />
-
   <!-- Run RViz -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find panda_bringup)/rviz/panda_bringup_gazebo.rviz" />
 
