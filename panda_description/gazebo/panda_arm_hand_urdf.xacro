@@ -112,7 +112,7 @@
         <depthImageTopicName>/hand_kinect/depth/image_raw</depthImageTopicName>
         <depthImageCameraInfoTopicName>/hand_kinect/depth/camera_info</depthImageCameraInfoTopicName>
         <pointCloudTopicName>/hand_kinect/depth/points</pointCloudTopicName>
-        <frameName>hand_kinect</frameName>
+        <frameName>panda_hand</frameName>
         <pointCloudCutoff>0.35</pointCloudCutoff>
         <distortionK1>0.00000001</distortionK1>
         <distortionK2>0.00000001</distortionK2>
