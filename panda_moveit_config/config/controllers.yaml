@@ -12,7 +12,6 @@ controller_list:
       - panda_joint6
       - panda_joint7
 
-
   - name: hand_controller
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
