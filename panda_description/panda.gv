@@ -1,0 +1,47 @@
+digraph G {
+node [shape=box];
+"link_arm_base" [label="link_arm_base"];
+"link_arm_0" [label="link_arm_0"];
+"link_arm_1" [label="link_arm_1"];
+"link_arm_2" [label="link_arm_2"];
+"link_arm_3" [label="link_arm_3"];
+"link_arm_4" [label="link_arm_4"];
+"link_arm_5" [label="link_arm_5"];
+"link_arm_6" [label="link_arm_6"];
+"link_arm_7" [label="link_arm_7"];
+"link_arm_8" [label="link_arm_8"];
+"link_hand" [label="link_hand"];
+"link_finger_l" [label="link_finger_l"];
+"link_finger_r" [label="link_finger_r"];
+"link_xtion" [label="link_xtion"];
+"link_xtion_optical" [label="link_xtion_optical"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"link_arm_base" -> "joint_arm_base" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"joint_arm_base" -> "link_arm_0"
+"link_arm_0" -> "joint_arm_1" [label="xyz: 0 0 0.333 \nrpy: 0 -0 0"]
+"joint_arm_1" -> "link_arm_1"
+"link_arm_1" -> "joint_arm_2" [label="xyz: 0 0 0 \nrpy: -1.5708 0 0"]
+"joint_arm_2" -> "link_arm_2"
+"link_arm_2" -> "joint_arm_3" [label="xyz: 0 -0.316 0 \nrpy: 1.5708 -0 0"]
+"joint_arm_3" -> "link_arm_3"
+"link_arm_3" -> "joint_arm_4" [label="xyz: 0.0825 0 0 \nrpy: 1.5708 -0 0"]
+"joint_arm_4" -> "link_arm_4"
+"link_arm_4" -> "joint_arm_5" [label="xyz: -0.0825 0.384 0 \nrpy: -1.5708 0 0"]
+"joint_arm_5" -> "link_arm_5"
+"link_arm_5" -> "joint_arm_6" [label="xyz: 0 0 0 \nrpy: 1.5708 -0 0"]
+"joint_arm_6" -> "link_arm_6"
+"link_arm_6" -> "joint_arm_7" [label="xyz: 0.088 0 0 \nrpy: 1.5708 -0 0"]
+"joint_arm_7" -> "link_arm_7"
+"link_arm_7" -> "joint_arm_8" [label="xyz: 0 0 0.107 \nrpy: 0 -0 0"]
+"joint_arm_8" -> "link_arm_8"
+"link_arm_8" -> "joint_hand" [label="xyz: 0 0 0 \nrpy: 0 0 -0.785398"]
+"joint_hand" -> "link_hand"
+"link_hand" -> "joint_finger_l" [label="xyz: 0 0 0.0584 \nrpy: 0 -0 0"]
+"joint_finger_l" -> "link_finger_l"
+"link_hand" -> "joint_finger_r" [label="xyz: 0 0 0.0584 \nrpy: 0 -0 0"]
+"joint_finger_r" -> "link_finger_r"
+"link_arm_base" -> "joint_xtion" [label="xyz: 0.2 0 1.4 \nrpy: 0 0.785398 0"]
+"joint_xtion" -> "link_xtion"
+"link_xtion" -> "joint_xtion_optical" [label="xyz: 0 0 0 \nrpy: -1.5708 -5.55112e-17 -1.5708"]
+"joint_xtion_optical" -> "link_xtion_optical"
+}
