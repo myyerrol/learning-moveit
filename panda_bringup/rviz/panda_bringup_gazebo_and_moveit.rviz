@@ -65,65 +65,78 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          panda_hand:
+          link_arm_0:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_leftfinger:
+          link_arm_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link0:
+          link_arm_2:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link1:
+          link_arm_3:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link2:
+          link_arm_4:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link3:
+          link_arm_5:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link4:
+          link_arm_6:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link5:
+          link_arm_7:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link6:
+          link_arm_8:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_arm_base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_finger_l:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link7:
+          link_finger_r:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link8:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          panda_rightfinger:
+          link_hand:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          link_xtion:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_xtion_optical:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
         Loop Animation: true
         Robot Alpha: 0.5
         Robot Color: 150; 50; 150
@@ -169,65 +182,78 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          panda_hand:
+          link_arm_0:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_leftfinger:
+          link_arm_1:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link0:
+          link_arm_2:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link1:
+          link_arm_3:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link2:
+          link_arm_4:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link3:
+          link_arm_5:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link4:
+          link_arm_6:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link5:
+          link_arm_7:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link6:
+          link_arm_8:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_arm_base:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          link_finger_l:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link7:
+          link_finger_r:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
-          panda_link8:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          panda_rightfinger:
+          link_hand:
             Alpha: 1
             Show Axes: false
             Show Trail: false
             Value: true
+          link_xtion:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          link_xtion_optical:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
         Robot Alpha: 0.5
         Show Robot Collision: false
         Show Robot Visual: true
@@ -236,7 +262,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: panda_link0
+    Fixed Frame: link_arm_base
     Frame Rate: 30
   Name: root
   Tools:

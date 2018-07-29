@@ -10,7 +10,9 @@
   <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_trajectory.launch" />
 
   <!-- Load moveit launch file -->
-  <include file="$(find panda_moveit_config)/launch/move_group.launch" />
+  <include file="$(find panda_moveit_config)/launch/move_group.launch">
+    <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
 
   <!-- Run RViz -->
   <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find panda_bringup)/rviz/panda_bringup_gazebo_and_moveit.rviz" output="screen">

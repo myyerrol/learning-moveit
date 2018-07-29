@@ -13,6 +13,6 @@
   <include file="$(find panda_gazebo_controller_config)/launch/panda_gazebo_joint_trajectory.launch" />
 
   <!-- Run RViz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find panda_description)/rviz/panda_arm_hand.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find panda_bringup)/rviz/panda_bringup_gazebo.rviz" />
 
 </launch>

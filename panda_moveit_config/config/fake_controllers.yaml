@@ -1,14 +1,13 @@
 controller_list:
   - name: fake_panda_arm_controller
     joints:
-      - panda_joint1
-      - panda_joint2
-      - panda_joint3
-      - panda_joint4
-      - panda_joint5
-      - panda_joint6
-      - panda_joint7
-  - name: fake_hand_controller
+      - joint_arm_1
+      - joint_arm_2
+      - joint_arm_3
+      - joint_arm_4
+      - joint_arm_5
+      - joint_arm_6
+      - joint_arm_7
+  - name: fake_panda_hand_controller
     joints:
-      - panda_finger_joint1
-      - panda_finger_joint2
+      - joint_finger_l

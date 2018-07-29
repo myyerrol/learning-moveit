@@ -145,7 +145,7 @@ panda_arm:
     - LazyPRMstarkConfigDefault
     - SPARSkConfigDefault
     - SPARStwokConfigDefault
-hand:
+panda_hand:
   planner_configs:
     - SBLkConfigDefault
     - ESTkConfigDefault

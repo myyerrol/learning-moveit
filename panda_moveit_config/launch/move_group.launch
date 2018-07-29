@@ -14,11 +14,11 @@
   <arg     if="$(arg info)" name="command_args" value="--debug" />
 
   <!-- move_group settings -->
-  <arg name="allow_trajectory_execution" default="true" />
-  <arg name="fake_execution" default="false" />
-  <arg name="max_safe_path_cost" default="1" />
+  <arg name="allow_trajectory_execution" default="true"/>
+  <arg name="fake_execution" default="false"/>
+  <arg name="max_safe_path_cost" default="1"/>
   <arg name="jiggle_fraction" default="0.05" />
-  <arg name="publish_monitored_planning_scene" default="true" />
+  <arg name="publish_monitored_planning_scene" default="true"/>
 
   <!-- Planning Functionality -->
   <include ns="move_group" file="$(find panda_moveit_config)/launch/planning_pipeline.launch.xml">
@@ -28,8 +28,8 @@
   <!-- Trajectory Execution Functionality -->
   <include ns="move_group" file="$(find panda_moveit_config)/launch/trajectory_execution.launch.xml" if="$(arg allow_trajectory_execution)">
     <arg name="moveit_manage_controllers" value="true" />
-    <arg name="moveit_controller_manager" value="panda" unless="$(arg fake_execution)" />
-    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)" />
+    <arg name="moveit_controller_manager" value="panda" unless="$(arg fake_execution)"/>
+    <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
   </include>
 
   <!-- Sensors Functionality -->
@@ -42,8 +42,8 @@
     <!-- Set the display variable, in case OpenGL code is used internally -->
     <env name="DISPLAY" value="$(optenv DISPLAY :0)" />
 
-    <param name="allow_trajectory_execution" value="$(arg allow_trajectory_execution)" />
-    <param name="max_safe_path_cost" value="$(arg max_safe_path_cost)" />
+    <param name="allow_trajectory_execution" value="$(arg allow_trajectory_execution)"/>
+    <param name="max_safe_path_cost" value="$(arg max_safe_path_cost)"/>
     <param name="jiggle_fraction" value="$(arg jiggle_fraction)" />
 
     <!-- load these non-default MoveGroup capabilities -->
