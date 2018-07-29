@@ -6,21 +6,21 @@ struct termios g_raw;
 
 TeleopArmHandKeyboard::TeleopArmHandKeyboard()
 {
-    arm_name_.push_back("panda_joint1");
-    arm_name_.push_back("panda_joint2");
-    arm_name_.push_back("panda_joint3");
-    arm_name_.push_back("panda_joint4");
-    arm_name_.push_back("panda_joint5");
-    arm_name_.push_back("panda_joint6");
-    arm_name_.push_back("panda_joint7");
+    arm_name_.push_back("joint_arm_1");
+    arm_name_.push_back("joint_arm_2");
+    arm_name_.push_back("joint_arm_3");
+    arm_name_.push_back("joint_arm_4");
+    arm_name_.push_back("joint_arm_5");
+    arm_name_.push_back("joint_arm_6");
+    arm_name_.push_back("joint_arm_7");
 
-    arm_goal_.trajectory.joint_names.push_back("panda_joint1");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint2");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint3");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint4");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint5");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint6");
-    arm_goal_.trajectory.joint_names.push_back("panda_joint7");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_1");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_2");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_3");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_4");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_5");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_6");
+    arm_goal_.trajectory.joint_names.push_back("joint_arm_7");
 
     arm_goal_.trajectory.points.resize(1);
     arm_goal_.trajectory.points[0].positions.resize(arm_name_.size());
@@ -34,8 +34,8 @@ TeleopArmHandKeyboard::TeleopArmHandKeyboard()
         arm_goal_.trajectory.points[0].accelerations[i] = 0.0;
     }
 
-    hand_goal_.trajectory.joint_names.push_back("panda_finger_joint1");
-    hand_goal_.trajectory.joint_names.push_back("panda_finger_joint2");
+    hand_goal_.trajectory.joint_names.push_back("joint_finger_l");
+    hand_goal_.trajectory.joint_names.push_back("joint_finger_r");
 
     hand_goal_.trajectory.points.resize(1);
     hand_goal_.trajectory.points[0].positions.resize(2);
@@ -59,7 +59,7 @@ TeleopArmHandKeyboard::TeleopArmHandKeyboard()
         "panda_arm_controller/follow_joint_trajectory", true);
 
     hand_trajectory_client_ = boost::make_shared<HandTrajectoryClient>(
-        "hand_controller/follow_joint_trajectory", true);
+        "panda_hand_controller/follow_joint_trajectory", true);
 
     // hand_command_client_ = boost::make_shared<HandCommandClient>(
     //     "hand_controller/gripper_cmd", true);
@@ -142,56 +142,56 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
 
         switch(keyboard_cmd) {
             case KEYCODE_Q: {
-                arm_position[arm_index_["panda_joint1"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint1"]] >= 2.90) {
-                    arm_position[arm_index_["panda_joint1"]] = 2.90;
+                arm_position[arm_index_["joint_arm_1"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_1"]] >= 2.90) {
+                    arm_position[arm_index_["joint_arm_1"]] = 2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_W: {
-                arm_position[arm_index_["panda_joint2"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint2"]] >= 1.76) {
-                    arm_position[arm_index_["panda_joint2"]] = 1.76;
+                arm_position[arm_index_["joint_arm_2"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_2"]] >= 1.76) {
+                    arm_position[arm_index_["joint_arm_2"]] = 1.76;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_E: {
-                arm_position[arm_index_["panda_joint3"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint3"]] >= 2.90) {
-                    arm_position[arm_index_["panda_joint3"]] = 2.90;
+                arm_position[arm_index_["joint_arm_3"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_3"]] >= 2.90) {
+                    arm_position[arm_index_["joint_arm_3"]] = 2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_A: {
-                arm_position[arm_index_["panda_joint4"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint4"]] >= 0.0) {
-                    arm_position[arm_index_["panda_joint4"]] = 0.0;
+                arm_position[arm_index_["joint_arm_4"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_4"]] >= 0.0) {
+                    arm_position[arm_index_["joint_arm_4"]] = 0.0;
                 }
                 break;
             }
             case KEYCODE_S: {
-                arm_position[arm_index_["panda_joint5"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint5"]] >= 2.90) {
-                    arm_position[arm_index_["panda_joint5"]] = 2.90;
+                arm_position[arm_index_["joint_arm_5"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_5"]] >= 2.90) {
+                    arm_position[arm_index_["joint_arm_5"]] = 2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_D: {
-                arm_position[arm_index_["panda_joint6"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint6"]] >= 3.75) {
-                    arm_position[arm_index_["panda_joint6"]] = 3.75;
+                arm_position[arm_index_["joint_arm_6"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_6"]] >= 3.75) {
+                    arm_position[arm_index_["joint_arm_6"]] = 3.75;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_Z: {
-                arm_position[arm_index_["panda_joint7"]] += arm_position_step_;
-                if (arm_position[arm_index_["panda_joint7"]] >= 2.90) {
-                    arm_position[arm_index_["panda_joint7"]] = 2.90;
+                arm_position[arm_index_["joint_arm_7"]] += arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_7"]] >= 2.90) {
+                    arm_position[arm_index_["joint_arm_7"]] = 2.90;
                 }
                 flag = true;
                 break;
@@ -213,56 +213,56 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
                 break;
             }
             case KEYCODE_Q_CAP: {
-                arm_position[arm_index_["panda_joint1"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint1"]] <= -2.90) {
-                    arm_position[arm_index_["panda_joint1"]] = -2.90;
+                arm_position[arm_index_["joint_arm_1"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_1"]] <= -2.90) {
+                    arm_position[arm_index_["joint_arm_1"]] = -2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_W_CAP: {
-                arm_position[arm_index_["panda_joint2"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint2"]] <= -1.76) {
-                    arm_position[arm_index_["panda_joint2"]] = -1.76;
+                arm_position[arm_index_["joint_arm_2"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_2"]] <= -1.76) {
+                    arm_position[arm_index_["joint_arm_2"]] = -1.76;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_E_CAP: {
-                arm_position[arm_index_["panda_joint3"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint3"]] <= -2.90) {
-                    arm_position[arm_index_["panda_joint3"]] = -2.90;
+                arm_position[arm_index_["joint_arm_3"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_3"]] <= -2.90) {
+                    arm_position[arm_index_["joint_arm_3"]] = -2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_A_CAP: {
-                arm_position[arm_index_["panda_joint4"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint4"]] <= -3.07) {
-                    arm_position[arm_index_["panda_joint4"]] = -3.07;
+                arm_position[arm_index_["joint_arm_4"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_4"]] <= -3.07) {
+                    arm_position[arm_index_["joint_arm_4"]] = -3.07;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_S_CAP: {
-                arm_position[arm_index_["panda_joint5"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint5"]] <= -2.90) {
-                    arm_position[arm_index_["panda_joint5"]] = -2.90;
+                arm_position[arm_index_["joint_arm_5"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_5"]] <= -2.90) {
+                    arm_position[arm_index_["joint_arm_5"]] = -2.90;
                 }
                 flag = true;
                 break;
             }
             case KEYCODE_D_CAP: {
-                arm_position[arm_index_["panda_joint6"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint6"]] <= 0.0) {
-                    arm_position[arm_index_["panda_joint6"]] = 0.0;
+                arm_position[arm_index_["joint_arm_6"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_6"]] <= 0.0) {
+                    arm_position[arm_index_["joint_arm_6"]] = 0.0;
                 }
                 break;
             }
             case KEYCODE_Z_CAP: {
-                arm_position[arm_index_["panda_joint7"]] -= arm_position_step_;
-                if (arm_position[arm_index_["panda_joint7"]] <= -2.90) {
-                    arm_position[arm_index_["panda_joint7"]] = -2.90;
+                arm_position[arm_index_["joint_arm_7"]] -= arm_position_step_;
+                if (arm_position[arm_index_["joint_arm_7"]] <= -2.90) {
+                    arm_position[arm_index_["joint_arm_7"]] = -2.90;
                 }
                 flag = true;
                 break;
@@ -288,16 +288,16 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
             }
         }
 
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint1"]] =
-            arm_position[arm_index_["panda_joint1"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint2"]] =
-            arm_position[arm_index_["panda_joint2"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint3"]] = arm_position[arm_index_["panda_joint3"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint4"]] = arm_position[arm_index_["panda_joint4"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint5"]] =
-            arm_position[arm_index_["panda_joint5"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint6"]] = arm_position[arm_index_["panda_joint6"]];
-        arm_goal_.trajectory.points[0].positions[arm_index_["panda_joint7"]] = arm_position[arm_index_["panda_joint7"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_1"]] =
+            arm_position[arm_index_["joint_arm_1"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_2"]] =
+            arm_position[arm_index_["joint_arm_2"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_3"]] = arm_position[arm_index_["joint_arm_3"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_4"]] = arm_position[arm_index_["joint_arm_4"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_5"]] =
+            arm_position[arm_index_["joint_arm_5"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_6"]] = arm_position[arm_index_["joint_arm_6"]];
+        arm_goal_.trajectory.points[0].positions[arm_index_["joint_arm_7"]] = arm_position[arm_index_["joint_arm_7"]];
 
         arm_goal_.trajectory.points[0].time_from_start = ros::Duration(5);
         arm_goal_.goal_time_tolerance = ros::Duration(0);

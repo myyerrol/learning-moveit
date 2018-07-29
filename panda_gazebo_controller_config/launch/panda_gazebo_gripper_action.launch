@@ -5,6 +5,6 @@
 
   <node name="gripper_action_controller_spawner" pkg="controller_manager" type="spawner"
         respawn="false" output="screen" ns="/"
-        args="hand_controller" />
+        args="panda_hand_controller" />
 
 </launch>
