@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot name="panda_hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="panda_hand" params="name:='hand' parent:='link_arm_8'  rpy:='0 0 0' xyz:='0 0 0'">
+  <xacro:macro name="panda_hand" params="name:='hand' parent:='arm_8' rpy:='0 0 0' xyz:='0 0 0'">
     <link name="link_${name}">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/hand.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/hand.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -24,20 +24,20 @@
     </link>
 
     <joint name="joint_${name}" type="fixed">
-      <origin xyz="${xyz}" rpy="${rpy}" />
-      <parent link="${parent}" />
+      <origin xyz="${xyz}" rpy="0 0 ${-pi/4}" />
+      <parent link="link_${parent}" />
       <child link="link_${name}" />
     </joint>
 
     <link name="link_finger_l">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/finger.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_finger.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/finger.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_finger.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -54,13 +54,13 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${pi}" />
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/finger.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_finger.dae" />
         </geometry>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${pi}" />
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/finger.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_finger.stl" />
         </geometry>
       </collision>
       <inertial>

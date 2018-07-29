@@ -3,23 +3,16 @@
 
   <xacro:macro name="panda_arm" params="name:='arm' xyz:='0 0 0' rpy:='0 0 0'">
     <link name="link_${name}_base" />
-<!--       <visual>
-        <origin xyz="${xyz}" rpy="${rpy}" />
-        <geometry>
-          <box size="0.05 0.05 0.05" />
-        </geometry>
-      </visual>
-    </link> -->
 
     <link name="link_${name}_0">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link0.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_0.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link0.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_0.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -32,7 +25,7 @@
       </inertial>
     </link>
 
-    <joint name="$joint_${name}_base" type="fixed">
+    <joint name="joint_${name}_base" type="fixed">
       <origin xyz="${xyz}" rpy="${rpy}" />
       <parent link="link_${name}_base" />
       <child  link="link_${name}_0" />
@@ -41,12 +34,12 @@
     <link name="link_${name}_1">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link1.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_1.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link1.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_1.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -71,12 +64,12 @@
     <link name="link_${name}_2">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link2.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_2.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link2.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_2.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -101,12 +94,12 @@
     <link name="link_${name}_3">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link3.dae"/>
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_3.dae"/>
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link3.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_3.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -131,12 +124,12 @@
     <link name="link_${name}_4">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link4.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_4.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link4.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_4.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -162,12 +155,12 @@
     <link name="link_${name}_5">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link5.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_5.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link5.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_5.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -192,12 +185,12 @@
     <link name="link_${name}_6">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link6.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_6.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link6.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_6.stl" />
         </geometry>
       </collision>
       <inertial>
@@ -222,12 +215,12 @@
     <link name="link_${name}_7">
       <visual>
         <geometry>
-          <mesh filename="package://panda_description/meshes/visual/link7.dae" />
+          <mesh filename="package://panda_description/meshes/visual/link_${name}_7.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://panda_description/meshes/collision/link7.stl" />
+          <mesh filename="package://panda_description/meshes/collision/link_${name}_7.stl" />
         </geometry>
       </collision>
       <inertial>

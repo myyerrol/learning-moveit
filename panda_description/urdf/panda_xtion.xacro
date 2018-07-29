@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="panda_xtion" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="dummy_inertial">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="0.001" />
+      <inertia ixx="0.00001" ixy="0" ixz="0"
+               iyy="0.00001" iyz="0"
+               izz="0.00001" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="panda_xtion" params="name:='xtion' parent:='arm_base' rpy:='0 0 0' xyz:='0 0 0' *origin *optical_origin">
+    <link name="link_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://panda_description/meshes/visual/link_${name}.dae" />
+        </geometry>
+        <material name="DarkGrey" />
+      </visual>
+      <inertial>
+        <origin xyz="-0.00936000000 -0.00003000000 -0.00273000000"
+        	    rpy="0 0 0" />
+        <mass value="0.21970000000"/>
+        <inertia ixx="0.00000429247" ixy="0.00000000000"
+        	     ixz="0.00000002565" iyy="0.00000008027"
+        	     iyz="0.00000000000" izz="0.00000427339" />
+      </inertial>
+    </link>
+
+    <joint name="joint_${name}" type="fixed">
+      <insert_block name="origin" />
+      <parent link="link_${parent}" />
+      <child link="link_${name}" />
+    </joint>
+
+    <link name="link_${name}_optical">
+      <dummy_inertial />
+    </link>
+
+    <joint name="joint_${name}_optical" type="fixed">
+      <insert_block name="optical_origin" />
+      <parent link="link_${name}" />
+      <child link="link_${name}_optical" />
+    </joint>
+  </xacro:macro>
+</robot>
