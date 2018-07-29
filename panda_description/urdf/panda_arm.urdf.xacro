@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
+<robot name="panda_arm" xmlns:xacro="http://www.ros.org/wiki/xacro" >
   <xacro:include filename="$(find panda_description)/urdf/panda_arm.xacro" />
-  <xacro:panda_arm />
 </robot>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
+<robot name="panda" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find panda_description)/urdf/panda_arm.xacro" />
-  <xacro:include filename="$(find panda_description)/urdf/hand.xacro" />
+  <xacro:include filename="$(find panda_description)/urdf/panda_hand.xacro" />
   <xacro:panda_arm />
-  <xacro:hand ns="panda" rpy="0 0 ${-pi/4}" connected_to="panda_link8" />
+  <xacro:panda_hand rpy="0 0 ${-pi/4}" />
 </robot>
