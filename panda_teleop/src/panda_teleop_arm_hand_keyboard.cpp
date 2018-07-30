@@ -64,9 +64,14 @@ TeleopArmHandKeyboard::TeleopArmHandKeyboard()
     // hand_command_client_ = boost::make_shared<HandCommandClient>(
     //     "hand_controller/gripper_cmd", true);
 
-    while (!arm_trajectory_client_->waitForServer(ros::Duration(5)) &&
-           !hand_trajectory_client_->waitForServer(ros::Duration(5))) {
-        ROS_INFO_STREAM("Waiting for the joint_trajectory_action server...");
+    while (!arm_trajectory_client_->waitForServer(ros::Duration(5)) ) {
+        ROS_INFO_STREAM(
+            "Waiting for the arm joint_trajectory_action server...");
+    }
+
+    while (!hand_trajectory_client_->waitForServer(ros::Duration(5)) ) {
+        ROS_INFO_STREAM(
+            "Waiting for the hand joint_trajectory_action server...");
     }
 
     // while (!hand_command_client_->waitForServer(ros::Duration(5))) {

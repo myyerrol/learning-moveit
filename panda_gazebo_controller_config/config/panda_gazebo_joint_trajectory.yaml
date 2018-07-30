@@ -8,9 +8,21 @@ panda_arm_controller:
     - joint_arm_5
     - joint_arm_6
     - joint_arm_7
+  gains:
+    joint_arm_1: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_2: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_3: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_4: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_5: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_6: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+    joint_arm_7: {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+
 
 panda_hand_controller:
   type: position_controllers/JointTrajectoryController
   joints:
     - joint_finger_l
     - joint_finger_r
+  gains:
+    joint_finger_l: {p: 50.0, i: 1.0, d: 0.01, i_clamp: 1.0}
+    joint_finger_r: {p: 50.0, i: 1.0, d: 0.01, i_clamp: 1.0}
