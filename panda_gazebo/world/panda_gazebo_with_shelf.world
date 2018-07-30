@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://bookshelf</uri>
+      <name>bookshelf</name>
+      <pose>0 1.1 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://object_cuboid</uri>
+      <name>object_cuboid</name>
+      <pose>0 0.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://object_cylinder</uri>
+      <name>object_cylinder</name>
+      <pose>-0.15 0.8 0.4 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://object_cube</uri>
+      <name>object_cube</name>
+      <pose>0.15 0.8 0.4 0 0 0</pose>
+    </include>
+  </world>
+</sdf>
