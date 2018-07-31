@@ -43,7 +43,6 @@ typedef
 actionlib::SimpleActionClient<control_msgs::FollowJointTrajectoryAction>
     HandTrajectoryClient;
 
-
 class TeleopArmHandKeyboard
 {
 public:

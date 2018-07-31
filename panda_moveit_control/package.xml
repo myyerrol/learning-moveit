@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>panda_moveit_motion_planning</name>
+  <name>panda_moveit_control</name>
   <version>0.0.1</version>
-  <description>The panda_moveit_motion_planning package provides motion planning for panda_arm_hand by using kinematics.</description>
+  <description>The panda_moveit_control package provides motion planning and control for panda_arm_hand by using kinematics.</description>
 
   <maintainer email="dave@picknik.ai">Dave Coleman</maintainer>
   <maintainer email="mike@picknik.ai">Mike Lautman</maintainer>
