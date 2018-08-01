@@ -42,6 +42,7 @@ include_directories(
 )
 
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -49,13 +50,13 @@ link_directories(
   ${catkin_LIBRARY_DIRS}
 )
 
-# add_executable(
-#   ${PROJECT_NAME}
-#   src/panda_moveit_motion_planning.cpp
-# )
+add_executable(
+  panda_moveit_pick_place_object
+  src/panda_moveit_pick_place_object.cpp
+)
 
-# target_link_libraries(
-#   ${PROJECT_NAME}
-#   ${catkin_LIBRARIES}
-#   ${Boost_LIBRARIES}
-# )
+target_link_libraries(
+  panda_moveit_pick_place_object
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
