@@ -15,7 +15,7 @@ class MoveItPickPlaceObject
 public:
     MoveItPickPlaceObject();
     ~MoveItPickPlaceObject();
-    void moveToPoseTarget(void);
+    void moveToTarget(void);
     bool planToPoseTarget(geometry_msgs::Pose pose);
     bool planToJointValueTarget(std::vector<double> joint_positions);
     bool planTo

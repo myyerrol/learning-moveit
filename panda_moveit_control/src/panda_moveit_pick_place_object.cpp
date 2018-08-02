@@ -40,7 +40,7 @@ MoveItPickPlaceObject::~MoveItPickPlaceObject()
 
 }
 
-void MoveItPickPlaceObject::moveToPoseTarget(void)
+void MoveItPickPlaceObject::moveToTarget(void)
 {
     g_move_group.move();
 }
