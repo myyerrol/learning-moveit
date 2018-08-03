@@ -53,6 +53,23 @@ bool MoveItPickPlaceObject::planToPoseTarget(geometry_msgs::Pose pose)
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
+bool MoveItPickPlaceObject::planToPoseTargetWithConstraints(
+    geometry_msgs::Pose pose,
+    moveit_msgs::Constraints constraints,
+    double planning_time = 10.0)
+{
+    g_move_group.setPathConstraints(constraints);
+    g_move_group.setPoseTarget(pose);
+    g_move_group.setPlanningTime(planning_time);
+
+    bool result = (g_move_group.plan(g_plan) ==
+                   moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+    g_move_group.clearPathConstraints();
+
+    return result;
+}
+
 bool MoveItPickPlaceObject::planToJointValueTarget(
     std::vector<double> joint_positions)
 {

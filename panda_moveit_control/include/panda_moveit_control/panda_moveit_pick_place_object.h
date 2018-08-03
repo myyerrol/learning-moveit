@@ -17,8 +17,10 @@ public:
     ~MoveItPickPlaceObject();
     void moveToTarget(void);
     bool planToPoseTarget(geometry_msgs::Pose pose);
+    bool planToPoseTargetWithConstraints(geometry_msgs::Pose pose,
+                                         moveit_msgs::Constraints constraints,
+                                         double planning_time = 10.0);
     bool planToJointValueTarget(std::vector<double> joint_positions);
-    bool planTo
     bool pickObject();
     bool placeOjbect();
     std::vector<double> getJointGroupPositions(
