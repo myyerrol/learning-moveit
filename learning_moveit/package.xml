@@ -16,7 +16,8 @@
   <exec_depend>panda_description</exec_depend>
   <exec_depend>panda_gazebo</exec_depend>
   <exec_depend>panda_gazebo_controller_config</exec_depend>
-  <exec_depend>panda_moveit_motion_planning</exec_depend>
+  <exec_depend>panda_moveit_config</exec_depend>
+  <exec_depend>panda_moveit_control</exec_depend>
   <exec_depend>panda_teleop</exec_depend>
 
   <export>
