@@ -53,6 +53,7 @@ link_directories(
 add_executable(
   panda_moveit_pick_place_object
   src/panda_moveit_pick_place_object.cpp
+  src/panda_moveit_pick_place_lib.cpp
 )
 
 target_link_libraries(
