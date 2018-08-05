@@ -1,10 +1,13 @@
 #include <panda_moveit_control/panda_moveit_pick_place_lib.h>
 
-// Global variables.
+// MoveGroupInterface global variables.
 moveit::planning_interface::MoveGroupInterface       g_move_group("panda_arm");
 moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+// MoveItVisualTools global variables.
+namespace                              g_rvt = rviz_visual_tools;
+moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
 
-MoveItPickPlaceLib::MoveItPickPlaceLib()
+MoveItPickPlaceLib::MoveItPickPlaceLib(void)
 {
 
     hand_goal_.trajectory.joint_names.push_back("joint_finger_l");
@@ -32,12 +35,37 @@ MoveItPickPlaceLib::MoveItPickPlaceLib()
     joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.loadRemoteControl();
+
+    text_pose_ = Eigen::Affine3d::Identity();
+    text_pose_.translation().z() = 1.75;
+
     ROS_INFO("Start moveit pick and place object demo...");
 }
 
 MoveItPickPlaceLib::~MoveItPickPlaceLib()
 {
 
+}
+
+void MoveItPickPlaceLib::visualizePlanPath(std::string text)
+{
+    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
+}
+
+void MoveItPickPlaceLib::visualizePlanPath(std::string text,
+                                           std::string label,
+                                           geometry_msgs::Pose pose)
+{
+    g_visual_tools.publishAxisLabeled(pose, label);
+    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
 }
 
 bool MoveItPickPlaceLib::moveToTarget(void)
