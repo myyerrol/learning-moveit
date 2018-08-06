@@ -27,9 +27,10 @@ public:
     MoveItPickPlaceLib(void);
     ~MoveItPickPlaceLib(void);
     void addCollisionObject();
-    void visualizePlanPath(std::string text);
-    void visualizePlanPath(std::string text, std::string label,
-                           geometry_msgs::Pose pose);
+    void visualizePoseTarget(std::string text, std::string label,
+                             geometry_msgs::Pose pose, bool prompt);
+    void visualizeJointValueTarget(std::string text, bool prompt);
+    void visualizePoseTargetWithConstraints(std::string text, );
     bool moveToTarget(void);
     bool planToPoseTarget(geometry_msgs::Pose pose);
     bool planToPoseTargetWithConstraints(geometry_msgs::Pose pose,

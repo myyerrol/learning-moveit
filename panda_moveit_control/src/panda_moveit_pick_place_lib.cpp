@@ -49,24 +49,44 @@ MoveItPickPlaceLib::~MoveItPickPlaceLib()
 
 }
 
-void MoveItPickPlaceLib::visualizePlanPath(std::string text)
+void MoveItPickPlaceLib::visualizePoseTarget(std::string text,
+                                             std::string label,
+                                             geometry_msgs::Pose pose,
+                                             bool prompt)
 {
-    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
-                                         joint_model_group_);
-    g_visual_tools.trigger();
-}
-
-void MoveItPickPlaceLib::visualizePlanPath(std::string text,
-                                           std::string label,
-                                           geometry_msgs::Pose pose)
-{
+    g_visual_tools.deleteAllMarkers();
     g_visual_tools.publishAxisLabeled(pose, label);
     g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
     g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
                                          joint_model_group_);
     g_visual_tools.trigger();
+
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+    }
+    else {
+        return;
+    }
 }
+
+void MoveItPickPlaceLib::visualizeJointValueTarget(std::string text,
+                                                   bool prompt)
+{
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
+
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+    }
+    else {
+        return;
+    }
+}
+
+
 
 bool MoveItPickPlaceLib::moveToTarget(void)
 {
