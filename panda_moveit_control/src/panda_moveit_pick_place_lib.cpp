@@ -38,8 +38,8 @@ MoveItPickPlaceLib::MoveItPickPlaceLib(void)
     g_visual_tools.deleteAllMarkers();
     g_visual_tools.loadRemoteControl();
 
-    text_pose_ = Eigen::Affine3d::Identity();
-    text_pose_.translation().z() = 1.75;
+    pose_text_ = Eigen::Affine3d::Identity();
+    pose_text_.translation().z() = 1.75;
 
     ROS_INFO("Start moveit pick and place object demo...");
 }
@@ -49,20 +49,25 @@ MoveItPickPlaceLib::~MoveItPickPlaceLib()
 
 }
 
-void MoveItPickPlaceLib::visualizePoseTarget(std::string text,
-                                             std::string label,
-                                             geometry_msgs::Pose pose,
-                                             bool prompt)
+void MoveItPickPlaceLib::visualizeCartesianTarget(
+    std::string text,
+    std::vector<geometry_msgs::Pose> waypoints,
+    bool prompt)
 {
     g_visual_tools.deleteAllMarkers();
-    g_visual_tools.publishAxisLabeled(pose, label);
-    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
-                                         joint_model_group_);
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishPath(waypoints, g_rvt::LIME_GREEN, g_rvt::SMALL);
+
+    for (std::size_t i = 0; i < waypoints.size(); i++) {
+        g_visual_tools.publishAxisLabeled(waypoints[i],
+                                          "pt" + std::to_string(i),
+                                          g_rvt::SMALL);
+    }
+
     g_visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -73,58 +78,96 @@ void MoveItPickPlaceLib::visualizeJointValueTarget(std::string text,
                                                    bool prompt)
 {
     g_visual_tools.deleteAllMarkers();
-    g_visual_tools.publishText(text_pose_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
     g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
                                          joint_model_group_);
     g_visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
     }
 }
 
+void MoveItPickPlaceLib::visualizePlan(std::string text, bool prompt)
+{
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
 
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+    }
+    else {
+        return;
+    }
+}
+
+void MoveItPickPlaceLib::visualizePoseTarget(geometry_msgs::Pose pose_target,
+                                             std::string label_target,
+                                             std::string text,
+                                             bool prompt)
+{
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.publishAxisLabeled(pose_target, label_target);
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
+
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+    }
+    else {
+        return;
+    }
+}
+
+void MoveItPickPlaceLib::visualizePoseTargetWithConstraints(
+    geometry_msgs::Pose pose_start,
+    geometry_msgs::Pose pose_target,
+    std::string label_start,
+    std::string label_target,
+    std::string text,
+    bool prompt)
+{
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.publishAxisLabeled(pose_start, label_start);
+    g_visual_tools.publishAxisLabeled(pose_target, label_target);
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+                                         joint_model_group_);
+    g_visual_tools.trigger();
+
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+    }
+    else {
+        return;
+    }
+}
+
+void MoveItPickPlaceLib::visualizeText(std::string text, bool prompt)
+{
+    g_visual_tools.deleteAllMarkers();
+    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
+    g_visual_tools.trigger();
+
+    if (prompt) {
+        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+    }
+    else {
+        return;
+    }
+}
 
 bool MoveItPickPlaceLib::moveToTarget(void)
 {
     return (g_move_group.move() ==
-            moveit::planning_interface::MoveItErrorCode::SUCCESS);
-}
-
-bool MoveItPickPlaceLib::planToPoseTarget(geometry_msgs::Pose pose)
-{
-    g_move_group.setPoseTarget(pose);
-
-    return (g_move_group.plan(g_plan) ==
-            moveit::planning_interface::MoveItErrorCode::SUCCESS);
-}
-
-bool MoveItPickPlaceLib::planToPoseTargetWithConstraints(
-    geometry_msgs::Pose pose,
-    moveit_msgs::Constraints constraints,
-    double planning_time)
-{
-    g_move_group.setPathConstraints(constraints);
-    g_move_group.setPoseTarget(pose);
-    g_move_group.setPlanningTime(planning_time);
-
-    bool result = (g_move_group.plan(g_plan) ==
-                   moveit::planning_interface::MoveItErrorCode::SUCCESS);
-
-    g_move_group.clearPathConstraints();
-
-    return result;
-}
-
-bool MoveItPickPlaceLib::planToJointValueTarget(
-    std::vector<double> joint_positions)
-{
-    g_move_group.setJointValueTarget(joint_positions);
-
-    return (g_move_group.plan(g_plan) ==
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
@@ -151,6 +194,40 @@ bool MoveItPickPlaceLib::planToCartesianTarget(
         ROS_INFO("Success, Cartesian path %.2f%% acheived!", fraction * 100);
         return true;
     }
+}
+
+bool MoveItPickPlaceLib::planToJointValueTarget(
+    std::vector<double> joint_positions)
+{
+    g_move_group.setJointValueTarget(joint_positions);
+
+    return (g_move_group.plan(g_plan) ==
+            moveit::planning_interface::MoveItErrorCode::SUCCESS);
+}
+
+bool MoveItPickPlaceLib::planToPoseTarget(geometry_msgs::Pose pose)
+{
+    g_move_group.setPoseTarget(pose);
+
+    return (g_move_group.plan(g_plan) ==
+            moveit::planning_interface::MoveItErrorCode::SUCCESS);
+}
+
+bool MoveItPickPlaceLib::planToPoseTargetWithConstraints(
+    geometry_msgs::Pose pose,
+    moveit_msgs::Constraints constraints,
+    double planning_time)
+{
+    g_move_group.setPathConstraints(constraints);
+    g_move_group.setPoseTarget(pose);
+    g_move_group.setPlanningTime(planning_time);
+
+    bool result = (g_move_group.plan(g_plan) ==
+                   moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+    g_move_group.clearPathConstraints();
+
+    return result;
 }
 
 std::vector<double> MoveItPickPlaceLib::getJointGroupPositions(
