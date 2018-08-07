@@ -26,7 +26,9 @@ class MoveItPickPlaceLib
 public:
     MoveItPickPlaceLib(void);
     ~MoveItPickPlaceLib(void);
-    void addCollisionObject();
+    void addCollisionObject(std::string object_id,
+                            shape_msgs::SolidPrimitive object_primitive,
+                            geometry_msgs::Pose object_pose);
     void attachCollisionObject();
     void detachCollisionObject();
     void removeCollisionObject();

@@ -49,6 +49,26 @@ MoveItPickPlaceLib::~MoveItPickPlaceLib()
 
 }
 
+void MoveItPickPlaceLib::addCollisionObject(
+    std::string object_id,
+    shape_msgs::SolidPrimitive object_primitive,
+    geometry_msgs::Pose object_pose)
+{
+    moveit_msgs::CollisionObject collision_object;
+    collision_object.header.frame_id = g_move_group.getPlanningFrame();
+
+    collision_object.primitives.push_back(object_primitive);
+    collision_object.primitive_poses.push_back(object_pose);
+    collision_object.operation = collision_object.ADD;
+
+    std::vector<moveit_msgs::CollisionObject> collision_objects;
+    collision_objects.push_back(collision_object);
+
+    ROS_INFO("Add an collision object into the demo.");
+
+    planning_scene_interface_.addCollisionObjects(collision_objects);
+}
+
 void MoveItPickPlaceLib::visualizeCartesianTarget(
     std::string text,
     std::vector<geometry_msgs::Pose> waypoints,
