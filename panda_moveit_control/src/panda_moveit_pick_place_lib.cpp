@@ -64,9 +64,34 @@ void MoveItPickPlaceLib::addCollisionObject(
     std::vector<moveit_msgs::CollisionObject> collision_objects;
     collision_objects.push_back(collision_object);
 
-    ROS_INFO("Add an collision object into the demo.");
+    ROS_INFO("Add an collision object into the world.");
 
     planning_scene_interface_.addCollisionObjects(collision_objects);
+}
+
+void MoveItPickPlaceLib::attachCollisionObject(std::string object_id)
+{
+    ROS_INFO("Attach an collision object into the robot.");
+
+    g_move_group.attachObject(object_id);
+}
+
+void MoveItPickPlaceLib::detachCollisionObject(std::string object_id)
+{
+    ROS_INFO("Detach an collision object from the robot.");
+
+    g_move_group.attachObject(object_id);
+
+}
+
+void MoveItPickPlaceLib::removeCollisionObject(std::string object_id)
+{
+    ROS_INFO("Remove an collision object from the world.");
+
+    std::vector<std::string> object_ids;
+    object_ids.push_back(object_id);
+
+    planning_scene_interface_.removeCollisionObjects(object_ids);
 }
 
 void MoveItPickPlaceLib::visualizeCartesianTarget(
@@ -211,7 +236,7 @@ bool MoveItPickPlaceLib::planToCartesianTarget(
         return false;
     }
     else {
-        ROS_INFO("Success, Cartesian path %.2f%% acheived!", fraction * 100);
+        ROS_INFO("Success, cartesian path %.2f%% acheived!", fraction * 100);
         return true;
     }
 }

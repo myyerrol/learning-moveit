@@ -29,9 +29,9 @@ public:
     void addCollisionObject(std::string object_id,
                             shape_msgs::SolidPrimitive object_primitive,
                             geometry_msgs::Pose object_pose);
-    void attachCollisionObject();
-    void detachCollisionObject();
-    void removeCollisionObject();
+    void attachCollisionObject(std::string object_id);
+    void detachCollisionObject(std::string object_id);
+    void removeCollisionObject(std::string object_id);
     void visualizeCartesianTarget(std::string text,
                                   std::vector<geometry_msgs::Pose> waypoints,
                                   bool prompt);
