@@ -232,11 +232,11 @@ bool MoveItPickPlaceLib::planToCartesianTarget(
                                                         trajectory);
 
     if (fraction == -1.0) {
-        ROS_INFO("Error, please check function!");
+        ROS_ERROR("Please check computeCartesianPath() function!");
         return false;
     }
     else {
-        ROS_INFO("Success, cartesian path %.2f%% acheived!", fraction * 100);
+        ROS_INFO("Cartesian path %.2f%% acheived!", fraction * 100);
         return true;
     }
 }

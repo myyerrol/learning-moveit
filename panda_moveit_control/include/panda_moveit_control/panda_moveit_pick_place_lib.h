@@ -58,8 +58,8 @@ public:
     bool planToPoseTargetWithConstraints(geometry_msgs::Pose pose,
                                          moveit_msgs::Constraints constraints,
                                          double planning_time = 10.0);
-    bool pickObject();
-    bool placeOjbect();
+    bool pickObject(void);
+    bool placeOjbect(void);
     std::vector<double> getJointGroupPositions(
         moveit::core::RobotStatePtr curent_state);
 private:
