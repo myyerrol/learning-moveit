@@ -6,4 +6,6 @@ int main(int argc, char **argv)
     ros::NodeHandle nh;
     ros::AsyncSpinner spin(1);
     spin.start();
+
+    MoveItPickPlaceLib pick_place_object;
 }
