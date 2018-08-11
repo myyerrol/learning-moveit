@@ -36,3 +36,33 @@ $> catkin_make
 ```
 
 ## 3. Usage
+
+### 3.1 Motion control
+
+```sh
+$> roslaunch panda_bringup panda_bringup_gazebo.launch
+$> rosrun panda_teleop panda_teleop_arm_hand_keyboard
+```
+![panda_control_rviz](.images/panda_control_rviz.png)
+![panda_control_gazebo](.images/panda_control_gazebo.png)
+
+
+### 3.2 Motion Planning
+
+```sh
+$> roslaunch panda_moveit_config demo.launch
+```
+![panda_planning_demo](.images/panda_planning_demo.png)
+
+```sh
+$> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
+```
+
+**Note**:
+
+![panda_planning_rviz](.images/panda_planning_rviz.png)
+![panda_planning_gazebo](.images/panda_planning_gazebo.png)
+
+## Summary
+
+
