@@ -61,11 +61,11 @@ MoveItPickPlaceLib::MoveItPickPlaceLib(void)
             "Waiting for the hand joint_trajectory_action server...");
     }
 
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
     pose_text_ = Eigen::Affine3d::Identity();
     pose_text_.translation().z() = 1.75;
@@ -82,9 +82,9 @@ void MoveItPickPlaceLib::addCollisionObject(
     shape_msgs::SolidPrimitive object_primitive,
     geometry_msgs::Pose object_pose)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit_msgs::CollisionObject collision_object;
-    collision_object.header.frame_id = g_move_group.getPlanningFrame();
+    collision_object.header.frame_id = move_group.getPlanningFrame();
 
     collision_object.primitives.push_back(object_primitive);
     collision_object.primitive_poses.push_back(object_pose);
@@ -102,16 +102,16 @@ void MoveItPickPlaceLib::attachCollisionObject(std::string object_id)
 {
     ROS_INFO("Attaching an collision object into the robot.");
 
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    g_move_group.attachObject(object_id);
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    move_group.attachObject(object_id);
 }
 
 void MoveItPickPlaceLib::detachCollisionObject(std::string object_id)
 {
     ROS_INFO("Detaching an collision object from the robot.");
 
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    g_move_group.attachObject(object_id);
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    move_group.attachObject(object_id);
 }
 
 void MoveItPickPlaceLib::removeCollisionObject(std::string object_id)
@@ -129,25 +129,25 @@ void MoveItPickPlaceLib::visualizeCartesianTarget(
     std::vector<geometry_msgs::Pose> waypoints,
     bool prompt)
 {
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishPath(waypoints, g_rvt::LIME_GREEN, g_rvt::SMALL);
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.publishPath(waypoints, rvt::LIME_GREEN, rvt::SMALL);
 
     for (std::size_t i = 0; i < waypoints.size(); i++) {
-        g_visual_tools.publishAxisLabeled(waypoints[i],
+        visual_tools.publishAxisLabeled(waypoints[i],
                                           "pt" + std::to_string(i),
-                                          g_rvt::SMALL);
+                                          rvt::SMALL);
     }
 
-    g_visual_tools.trigger();
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -157,25 +157,25 @@ void MoveItPickPlaceLib::visualizeCartesianTarget(
 void MoveItPickPlaceLib::visualizeJointValueTarget(std::string text,
                                                    bool prompt)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
+    joint_model_group_ = move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.publishTrajectoryLine(plan.trajectory_,
                                          joint_model_group_);
-    g_visual_tools.trigger();
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -184,25 +184,25 @@ void MoveItPickPlaceLib::visualizeJointValueTarget(std::string text,
 
 void MoveItPickPlaceLib::visualizePlan(std::string text, bool prompt)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
+    joint_model_group_ = move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.publishTrajectoryLine(plan.trajectory_,
                                          joint_model_group_);
-    g_visual_tools.trigger();
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -214,26 +214,26 @@ void MoveItPickPlaceLib::visualizePoseTarget(geometry_msgs::Pose pose_target,
                                              std::string text,
                                              bool prompt)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
+    joint_model_group_ = move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishAxisLabeled(pose_target, label_target);
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+    visual_tools.publishAxisLabeled(pose_target, label_target);
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.publishTrajectoryLine(plan.trajectory_,
                                          joint_model_group_);
-    g_visual_tools.trigger();
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -248,27 +248,27 @@ void MoveItPickPlaceLib::visualizePoseTargetWithConstraints(
     std::string text,
     bool prompt)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
+    joint_model_group_ = move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishAxisLabeled(pose_start, label_start);
-    g_visual_tools.publishAxisLabeled(pose_target, label_target);
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.publishTrajectoryLine(g_plan.trajectory_,
+    visual_tools.publishAxisLabeled(pose_start, label_start);
+    visual_tools.publishAxisLabeled(pose_target, label_target);
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.publishTrajectoryLine(plan.trajectory_,
                                          joint_model_group_);
-    g_visual_tools.trigger();
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
@@ -277,34 +277,36 @@ void MoveItPickPlaceLib::visualizePoseTargetWithConstraints(
 
 void MoveItPickPlaceLib::visualizeText(std::string text, bool prompt)
 {
-    namespace                              g_rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools g_visual_tools("link_arm_base");
+    namespace                              rvt = rviz_visual_tools;
+    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
 
-    g_visual_tools.deleteAllMarkers();
-    g_visual_tools.loadRemoteControl();
+    visual_tools.deleteAllMarkers();
+    visual_tools.loadRemoteControl();
 
-    g_visual_tools.publishText(pose_text_, text, g_rvt::WHITE, g_rvt::XLARGE);
-    g_visual_tools.trigger();
+    visual_tools.publishText(pose_text_, text, rvt::WHITE, rvt::XLARGE);
+    visual_tools.trigger();
 
     if (prompt) {
-        g_visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
+        visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo.");
     }
     else {
         return;
     }
 }
 
-bool MoveItErrorCode::executeToTarget(void)
+bool MoveItPickPlaceLib::executeToTarget(void)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    return (g_move_group.execute() ==
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
+
+    return (move_group.execute(plan) ==
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
 bool MoveItPickPlaceLib::moveToTarget(void)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    return (g_move_group.move() ==
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    return (move_group.move() ==
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
@@ -314,12 +316,12 @@ bool MoveItPickPlaceLib::planToCartesianTarget(
     double end_effector_step,
     double jump_threshold)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    g_move_group.setMaxVelocityScalingFactor(velocity_scaling_factor);
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    move_group.setMaxVelocityScalingFactor(velocity_scaling_factor);
 
     moveit_msgs::RobotTrajectory trajectory;
 
-    double fraction = g_move_group.computeCartesianPath(waypoints,
+    double fraction = move_group.computeCartesianPath(waypoints,
                                                         end_effector_step,
                                                         jump_threshold,
                                                         trajectory);
@@ -338,23 +340,23 @@ bool MoveItPickPlaceLib::planToCartesianTarget(
 bool MoveItPickPlaceLib::planToJointValueTarget(
     std::vector<double> joint_positions)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    g_move_group.setJointValueTarget(joint_positions);
+    move_group.setJointValueTarget(joint_positions);
 
-    return (g_move_group.plan(g_plan) ==
+    return (move_group.plan(plan) ==
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
 bool MoveItPickPlaceLib::planToPoseTarget(geometry_msgs::Pose pose)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    g_move_group.setPoseTarget(pose);
+    move_group.setPoseTarget(pose);
 
-    return (g_move_group.plan(g_plan) ==
+    return (move_group.plan(plan) ==
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
@@ -363,17 +365,17 @@ bool MoveItPickPlaceLib::planToPoseTargetWithConstraints(
     moveit_msgs::Constraints constraints,
     double planning_time)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    g_move_group.setPathConstraints(constraints);
-    g_move_group.setPoseTarget(pose);
-    g_move_group.setPlanningTime(planning_time);
+    move_group.setPathConstraints(constraints);
+    move_group.setPoseTarget(pose);
+    move_group.setPlanningTime(planning_time);
 
-    bool result = (g_move_group.plan(g_plan) ==
+    bool result = (move_group.plan(plan) ==
                    moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
-    g_move_group.clearPathConstraints();
+    move_group.clearPathConstraints();
 
     return result;
 }
@@ -421,10 +423,10 @@ bool MoveItPickPlaceLib::placeSimpleObjectPipeline(void)
 std::vector<double> MoveItPickPlaceLib::getJointGroupPositions(
     moveit::core::RobotStatePtr current_state)
 {
-    moveit::planning_interface::MoveGroupInterface g_move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan g_plan;
+    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
 
-    joint_model_group_ = g_move_group.getCurrentState()->getJointModelGroup(
+    joint_model_group_ = move_group.getCurrentState()->getJointModelGroup(
         "panda_arm");
 
     std::vector<double> joint_positions;
