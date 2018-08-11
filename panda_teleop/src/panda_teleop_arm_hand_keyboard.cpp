@@ -312,14 +312,14 @@ void TeleopArmHandKeyboard::spinTeleopArmHand()
 
 int main(int argc, char **argv)
 {
-    ros::init(argc,argv,"panda_teleop_arm_hand_keyboard",
-        ros::init_options::NoSigintHandler);
+    ros::init(argc, argv, "panda_teleop_arm_hand_keyboard",
+              ros::init_options::NoSigintHandler);
 
     TeleopArmHandKeyboard teleop_arm_hand_keyboard;
 
-    boost::thread make_thread = boost::thread(boost::bind(
-        &TeleopArmHandKeyboard::spinTeleopArmHand,
-        &teleop_arm_hand_keyboard));
+    boost::thread make_thread = boost::thread(
+        boost::bind(&TeleopArmHandKeyboard::spinTeleopArmHand,
+                    &teleop_arm_hand_keyboard));
 
     ros::spin();
 
