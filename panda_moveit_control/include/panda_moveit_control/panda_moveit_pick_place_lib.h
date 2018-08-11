@@ -48,6 +48,7 @@ public:
                                             std::string text,
                                             bool prompt);
     void visualizeText(std::string text, bool prompt);
+    bool executeToTarget(void);
     bool moveToTarget(void);
     bool planToCartesianTarget(std::vector<geometry_msgs::Pose> waypoints,
                                double velocity_scaling_factor = 0.1,
@@ -58,8 +59,8 @@ public:
     bool planToPoseTargetWithConstraints(geometry_msgs::Pose pose,
                                          moveit_msgs::Constraints constraints,
                                          double planning_time = 10.0);
-    bool pickSimpleObject(void);
-    bool placeSimpleOjbect(void);
+    bool pickSimpleObjectPipeline(void);
+    bool placeSimpleObjectPipeline(void);
     std::vector<double> getJointGroupPositions(
         moveit::core::RobotStatePtr curent_state);
 private:
@@ -71,4 +72,3 @@ private:
 };
 
 #endif // PANDA_MOVEIT_PICK_PLACE_LIB_H
-

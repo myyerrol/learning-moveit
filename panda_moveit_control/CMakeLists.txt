@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(panda_moveit_control)
 
-set(CMAKE_PREFIX_PATH "/opt/ros/kinetic")
+# set(CMAKE_PREFIX_PATH "/opt/ros/kinetic")
 
 add_compile_options(-std=c++11)
 
