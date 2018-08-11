@@ -91,7 +91,7 @@ public:
                                double end_effector_step = 0.01,
                                double jump_threshold = 0.0);
     bool planToJointValueTarget(std::vector<double> joint_positions);
-    bool planToPoseTarget(geometry_msgs::Pose pose);
+    bool planToPoseTarget(geometry_msgs::Pose pose, bool move);
     bool planToPoseTargetWithConstraints(geometry_msgs::Pose pose,
                                          moveit_msgs::Constraints constraints,
                                          double planning_time = 10.0);

@@ -349,15 +349,38 @@ bool MoveItPickPlaceLib::planToJointValueTarget(
             moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
-bool MoveItPickPlaceLib::planToPoseTarget(geometry_msgs::Pose pose)
+bool MoveItPickPlaceLib::planToPoseTarget(geometry_msgs::Pose pose,
+                                          bool move)
 {
     moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
     moveit::planning_interface::MoveGroupInterface::Plan plan;
 
     move_group.setPoseTarget(pose);
 
-    return (move_group.plan(plan) ==
-            moveit::planning_interface::MoveItErrorCode::SUCCESS);
+    moveit::planning_interface::MoveItErrorCode error_code;
+    error_code = move_group.plan(plan);
+    bool result;
+
+    if (error_code == moveit::planning_interface::MoveItErrorCode::SUCCESS) {
+        ROS_INFO("Planning arm's trajectory successfully!");
+        result = true;
+    }
+    else {
+        ROS_ERROR("Planning arm's trajectory failed!");
+        result = false;
+    }
+
+    if (move) {
+        if (move_group.move() ==
+            moveit::planning_interface::MoveItErrorCode::SUCCESS) {
+            ROS_INFO("Moveing arm successfully!");
+        }
+        else {
+            ROS_ERROR("Moving arm failed!");
+        }
+    }
+
+    return result;
 }
 
 bool MoveItPickPlaceLib::planToPoseTargetWithConstraints(
@@ -395,25 +418,7 @@ bool MoveItPickPlaceLib::pickSimpleObjectPipeline(void)
     target_pose_1.position.y = 0.8;
     target_pose_1.position.z = 0.4;
 
-    if (!planToPoseTarget(target_pose_1)) {
-        ROS_ERROR("Planning arm's trajectory with target pose 1 failed!");
-        return false;
-    }
-    else {
-        ROS_INFO("Planning arm's trajectory with target pose 1 successfully!");
-    }
-
-    ros::Duration(2.0).sleep();
-
-    ROS_INFO("Moving arm from initial pose to target pose 1...");
-
-    if (!moveToTarget()) {
-        ROS_ERROR("Moving arm failed!");
-        return false;
-    }
-
-    ROS_INFO("Moveing arm successfully!");
-
+    planToPoseTarget(target_pose_1, true);
 }
 
 bool MoveItPickPlaceLib::placeSimpleObjectPipeline(void)
