@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(panda_moveit_control)
 
-# set(CMAKE_PREFIX_PATH "/opt/ros/kinetic")
+set(CMAKE_PREFIX_PATH "/opt/ros/kinetic")
 
 add_compile_options(-std=c++11)
 
@@ -18,7 +18,6 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning
   moveit_ros_planning_interface
   pluginlib
-  geometric_shapes
 )
 
 find_package(Boost REQUIRED system filesystem date_time thread)
@@ -30,7 +29,6 @@ catkin_package(
     moveit_core
     moveit_visual_tools
     moveit_ros_planning_interface
-    interactive_markers
   DEPENDS
     EIGEN3
 )

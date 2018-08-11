@@ -17,22 +17,19 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <build_depend>pluginlib</build_depend>
   <build_depend>eigen</build_depend>
   <build_depend>moveit_core</build_depend>
-  <build_depend>moveit_ros_planning_interface</build_depend>
   <build_depend>moveit_ros_perception</build_depend>
-  <build_depend>interactive_markers</build_depend>
-  <build_depend>geometric_shapes</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
   <build_depend>moveit_visual_tools</build_depend>
+  <build_depend>pluginlib</build_depend>
 
-  <exec_depend>pluginlib</exec_depend>
+  <exec_depend>joy</exec_depend>
   <exec_depend>moveit_core</exec_depend>
   <exec_depend>moveit_fake_controller_manager</exec_depend>
-  <exec_depend>moveit_ros_planning_interface</exec_depend>
   <exec_depend>moveit_ros_perception</exec_depend>
-  <exec_depend>interactive_markers</exec_depend>
+  <exec_depend>moveit_ros_planning_interface</exec_depend>
   <exec_depend>moveit_visual_tools</exec_depend>
-  <exec_depend>joy</exec_depend>
+  <exec_depend>pluginlib</exec_depend>
 
 </package>
