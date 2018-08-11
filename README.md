@@ -58,11 +58,9 @@ $> roslaunch panda_moveit_config demo.launch
 $> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
 ```
 
-**Note**:
-
 ![panda_planning_rviz](.images/panda_planning_rviz.png)
 ![panda_planning_gazebo](.images/panda_planning_gazebo.png)
 
-## Summary
+## 4. Note
 
 
