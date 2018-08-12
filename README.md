@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-This ros metapackage contains some packages that I wrote it myself according to the tutorials provided by the MoveIt! official website. The MoveIt! Tutorials website is: http://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html. **Before you begin to learn, you must first glance at the following [#4-note)**!  
+This ros metapackage contains some packages that I wrote it myself according to the tutorials provided by the MoveIt! official website. The MoveIt! Tutorials website is: http://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html. **Before you begin to learn, you must first glance at the following [Notes](#4-note)**!  
 
 ### 1.1 Basic Components
 
