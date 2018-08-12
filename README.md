@@ -88,13 +88,15 @@ As mentioned above, the `PositionJointInterface` can't simulate gravity in Gazeb
 
 ### 4.2 MoveIt Sensor Error
 
-When you run `panda_moveit_config/demo.launch` or other moveit launch files, you will notice that the terminal will output following some error messages:
+When you run `panda_moveit_config/launch/demo.launch` or other moveit launch files, you will notice that the terminal will output following some error messages:
 
 ```txt
 [ERROR] [1534042979.682769522]: XmlRpc Exception: type error
 [ERROR] [1534042979.682802441]: Failed to configure updater of type PointCloudUpdater
 ```
 
+I haven't found a solution to this problem for a long time on Google, and I'm sure there's no problem with the `panda_moveit_config/config/sensors_xtion.yaml ` file. If someone has encountered similar problem, I hope he can provide a solution, thanks.
 
+### 4.3 Gazebo Pick Error
 
-### 4.3
+Whenever I remotely control panda manipulator to grasp ojbects on the cabinet in Gazebo, objects will always be flown at the moment the end effector is clamped. About this problem, I analyzed the possible reason is that the parameters of the Gazebo simulation are not set correctly. Of course, there may be other reasons. I wrote it down first, and if I have a chance and enough time latter I'll fix it.
