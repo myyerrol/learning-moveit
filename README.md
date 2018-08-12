@@ -2,8 +2,7 @@
 
 ## 1. Introduction
 
-This ros metapackage contains some packages that I wrote it myself according to the tutorials provided by the MoveIt! official website. The MoveIt! Tutorials website is: http://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html.
-
+This ros metapackage contains some packages that I wrote it myself according to the tutorials provided by the MoveIt! official website. The MoveIt! Tutorials website is: http://docs.ros.org/kinetic/api/moveit_tutorials/html/index.html. **Before you begin to learn, you must first glance at the following [Notes](.README.md/#4-note)**!  
 
 ### 1.1 Basic Components
 
@@ -72,7 +71,7 @@ $> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
 ![panda_planning_rviz](.images/panda_planning_rviz.png)
 ![panda_planning_gazebo](.images/panda_planning_gazebo.png)
 
-## 4. Note
+## 4. Notes
 
 ### 4.1 Controller Warning
 
@@ -85,8 +84,17 @@ When you run `panda_bringup_gazebo.launch` or `panda_bringup_gazebo_and_moveit.l
 [ WARN] [1534040926.378348094, 0.132000000]: For details, see https://github.com/ros-simulation/gazebo_ros_pkgs/issues/612
 ```
 
-As mentioned above, the `PositionJointInterface` can't simulate gravity in Gazebo. It must use the `VelocityJointInterface` or `EffortJointInterface`. But because setting the PID parameters of the panda manipulator is very complicated and time-consuming, I chose the `PositionJointInterface` to reduce the workload. **The result is that when the velocity and amplitude of the panda manipulator exceeds a certain value, the entire panda manipulator will fly in Gazebo!** I hope that someone will be able to solve this problem thoroughly.
+As mentioned above, the `PositionJointInterface` can't simulate gravity in Gazebo. It must use the `VelocityJointInterface` or `EffortJointInterface`. But because setting the PID parameters of the panda manipulator is very complicated and time-consuming, I chose the `PositionJointInterface` to reduce the workload. **The result is that when the velocity and amplitude of the panda manipulator exceeds a certain value, the entire panda manipulator will fly in Gazebo**! I hope that someone will be able to solve this problem thoroughly.
 
-### 4.2
+### 4.2 MoveIt Sensor Error
+
+When you run `panda_moveit_config/demo.launch` or other moveit launch files, you will notice that the terminal will output following some error messages:
+
+```txt
+[ERROR] [1534042979.682769522]: XmlRpc Exception: type error
+[ERROR] [1534042979.682802441]: Failed to configure updater of type PointCloudUpdater
+```
+
+
 
 ### 4.3
