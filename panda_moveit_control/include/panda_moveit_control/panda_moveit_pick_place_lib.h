@@ -84,8 +84,6 @@ public:
                                             std::string text,
                                             bool prompt);
     void visualizeText(std::string text, bool prompt);
-    bool executeToTarget(void);
-    bool moveToTarget(void);
     bool planToCartesianTarget(std::vector<geometry_msgs::Pose> waypoints,
                                double velocity_scaling_factor = 0.1,
                                double end_effector_step = 0.01,

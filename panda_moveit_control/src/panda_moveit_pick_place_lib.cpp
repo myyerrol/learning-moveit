@@ -61,12 +61,6 @@ MoveItPickPlaceLib::MoveItPickPlaceLib(void)
             "Waiting for the hand joint_trajectory_action server...");
     }
 
-    namespace                              rvt = rviz_visual_tools;
-    moveit_visual_tools::MoveItVisualTools visual_tools("link_arm_base");
-
-    visual_tools.deleteAllMarkers();
-    visual_tools.loadRemoteControl();
-
     pose_text_ = Eigen::Affine3d::Identity();
     pose_text_.translation().z() = 1.75;
 
@@ -292,22 +286,6 @@ void MoveItPickPlaceLib::visualizeText(std::string text, bool prompt)
     else {
         return;
     }
-}
-
-bool MoveItPickPlaceLib::executeToTarget(void)
-{
-    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-    moveit::planning_interface::MoveGroupInterface::Plan plan;
-
-    return (move_group.execute(plan) ==
-            moveit::planning_interface::MoveItErrorCode::SUCCESS);
-}
-
-bool MoveItPickPlaceLib::moveToTarget(void)
-{
-    moveit::planning_interface::MoveGroupInterface move_group("panda_arm");
-    return (move_group.move() ==
-            moveit::planning_interface::MoveItErrorCode::SUCCESS);
 }
 
 bool MoveItPickPlaceLib::planToCartesianTarget(
