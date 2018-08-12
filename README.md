@@ -26,12 +26,21 @@ This ros metapackage contains some packages that I wrote it myself according to 
 
 ## 2. Installation
 
+- Installing ROS packages.
 ```sh
 $> roscd
 $> cd ../src
 $> git clone https://github.com/myyerrol/learning_moveit.git
 $> cd ..
 $> rosdep install -y --from-paths src --ignore-src --rosdistro kinetic
+$> cd src/learning_moveit
+$> ./setup.sh
+```
+
+- Building ROS packages.
+```sh
+$> roscd
+$> cd ..
 $> catkin_make
 ```
 
@@ -54,6 +63,8 @@ $> roslaunch panda_moveit_config demo.launch
 ```
 ![panda_planning_demo](.images/panda_planning_demo.png)
 
+---
+
 ```sh
 $> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
 ```
@@ -63,4 +74,5 @@ $> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
 
 ## 4. Note
 
+- **Because **.
 
