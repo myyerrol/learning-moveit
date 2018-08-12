@@ -74,5 +74,19 @@ $> roslaunch panda_bringup panda_bringup_gazebo_and_moveit.launch
 
 ## 4. Note
 
-- **Because **.
+### 4.1 Controller Warning
 
+When you run `panda_bringup_gazebo.launch` or `panda_bringup_gazebo_and_moveit.launch`, you will notice that the terminal will output following some warning messages:
+
+```txt
+[ WARN] [1534040926.378110292, 0.132000000]: The default_robot_hw_sim plugin is using the Joint::SetPosition method without preserving the link velocity.
+[ WARN] [1534040926.378135775, 0.132000000]: As a result, gravity will not be simulated correctly for your model.
+[ WARN] [1534040926.378288871, 0.132000000]: Please set gazebo_pid parameters, switch to the VelocityJointInterface or EffortJointInterface, or upgrade to Gazebo 9.
+[ WARN] [1534040926.378348094, 0.132000000]: For details, see https://github.com/ros-simulation/gazebo_ros_pkgs/issues/612
+```
+
+As mentioned above, the `PositionJointInterface` can't simulate gravity in Gazebo. It must use the `VelocityJointInterface` or `EffortJointInterface`. But because setting the PID parameters of the panda manipulator is very complicated and time-consuming, I chose the `PositionJointInterface` to reduce the workload. **The result is that when the velocity and amplitude of the panda manipulator exceeds a certain value, the entire panda manipulator will fly in Gazebo!** I hope that someone will be able to solve this problem thoroughly.
+
+### 4.2
+
+### 4.3
