@@ -7,16 +7,20 @@ PATH_HOME=${HOME}
 installROSPackages()
 {
     sudo apt-get update
-    sudo apt-get install ros-kinetic-robot-state-publisher \
+    sudo apt-get install ros-kinetic-effort-controllers \
+                         ros-kinetic-robot-state-publisher \
                          ros-kinetic-joint-state-controller \
                          ros-kinetic-joint-state-publisher \
+                         ros-kinetic-joint-trajectory-action \
                          ros-kinetic-joint-trajectory-controller \
                          ros-kinetic-gazebo-plugins \
                          ros-kinetic-gazebo-ros \
                          ros-kinetic-gazebo-ros-control \
                          ros-kinetic-moveit-ros-perception \
                          ros-kinetic-moveit-simple-controller-manager \
-                         ros-kinetic-moveit-visual-tools
+                         ros-kinetic-moveit-visual-tools \
+                         ros-kinetic-position-controllers \
+                         ros-kinetic-velocity-controllers
 }
 
 setGazeboModels()
@@ -41,6 +45,5 @@ main()
     setGazeboModels
 }
 
-# Run script
 RUNNING=$(basename $0)
 [ "$RUNNING" = "setup.sh" ] && main
