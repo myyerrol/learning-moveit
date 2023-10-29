@@ -1,4 +1,4 @@
-# learning_moveit
+# learning-moveit
 
 ## 1. Introduction
 
@@ -29,10 +29,10 @@ This ros metapackage contains some packages that I wrote it myself according to 
 ```sh
 $> roscd
 $> cd ../src
-$> git clone https://github.com/myyerrol/learning_moveit.git
+$> git clone https://github.com/myyerrol/learning-moveit.git
 $> cd ..
 $> rosdep install -y --from-paths src --ignore-src --rosdistro kinetic
-$> cd src/learning_moveit
+$> cd src/learning-moveit
 $> ./setup.sh
 ```
 
